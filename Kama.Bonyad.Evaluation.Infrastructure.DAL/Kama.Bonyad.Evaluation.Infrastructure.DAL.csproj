@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E648B5DB-0DBD-4A16-9E5D-223B31983D54}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kama.Bonyad.Evaluation.Infrastructure.DAL</RootNamespace>
+    <AssemblyName>Kama.Bonyad.Evaluation.Infrastructure.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Kama.Bonyad.Evaluation.API\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Kama.AppCore, Version=1.1.0.20383, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Kama.Bonyad.Agreement.API\bin\Kama.AppCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Kama.DatabaseModel, Version=1.1.0.21073, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Kama.Bonyad.Agreement.API\bin\Kama.DatabaseModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Kama.Organization.Core.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Kama.Bonyad.Agreement.API\bin\Kama.Organization.Core.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DatabaseModel.cs" />
+    <Content Include="DatabaseScript\Functions\date\fnGetLastDateOfJalaliMonth.sql" />
+    <Content Include="DatabaseScript\Functions\date\fnGetFirstDateOfJalaliMonth.sql" />
+    <Content Include="DatabaseScript\Functions\date\fnJalaliToGregorian.sql" />
+    <Content Include="DatabaseScript\Functions\date\fnGregorianToJalali.sql" />
+    <Content Include="DatabaseScript\Functions\date\fnIsLeapYear.sql" />
+    <Content Include="DatabaseScript\Functions\date\fnIsJalaliLeapYear.sql" />
+    <Content Include="DatabaseScript\Functions\date\fnNewClassNumber.sql" />
+    <Content Include="DatabaseScript\Functions\date\fnSplitStringList.sql" />
+    <Content Include="DatabaseScript\Functions\fnGenerateTrackingCode.sql" />
+    <Content Include="DatabaseScript\Functions\fnGetLastMagistrateMinisterListType.sql" />
+    <Content Include="DatabaseScript\Functions\fnNewClassNumber.sql" />
+    <Content Include="DatabaseScript\Functions\fnGetLastOpinionByPositionType.sql" />
+    <Content Include="DatabaseScript\Kama.DevOps.exe" />
+    <Content Include="DatabaseScript\Procedures\pbl\Attachment\spDeleteAttachment.sql" />
+    <Content Include="DatabaseScript\Procedures\pbl\Attachment\spGetAttachment.sql" />
+    <Content Include="DatabaseScript\Procedures\pbl\Attachment\spGetAttachments.sql" />
+    <Content Include="DatabaseScript\Procedures\pbl\Attachment\spModifyAttachment.sql" />
+    <Content Include="DatabaseScript\Procedures\pbl\Flow\spAddFlow.sql" />
+    <Content Include="DatabaseScript\Procedures\pbl\Flow\spGetFlows.sql" />
+    <Content Include="DatabaseScript\Procedures\prd\Document\spDeleteDocument.sql" />
+    <Content Include="DatabaseScript\Procedures\prd\Document\spGetDocument.sql" />
+    <Content Include="DatabaseScript\Procedures\prd\Document\spGetDocuments.sql" />
+    <Content Include="DatabaseScript\Procedures\prd\Document\spModifyDocument.sql" />
+    <Content Include="DatabaseScript\Procedures\prd\Tag\spDeleteTag.sql" />
+    <Content Include="DatabaseScript\Procedures\prd\Tag\spAddTag.sql" />
+    <Content Include="DatabaseScript\Procedures\prd\Product\spDeleteProduct.sql" />
+    <Content Include="DatabaseScript\Procedures\prd\Product\spGetProduct.sql" />
+    <Content Include="DatabaseScript\Procedures\prd\Product\spGetProducts.sql" />
+    <Content Include="DatabaseScript\Procedures\prd\Product\spModifyProduct.sql" />
+    <Content Include="DatabaseScript\Procedures\prd\ProductClassification\spDeleteProductClassification.sql" />
+    <Content Include="DatabaseScript\Procedures\prd\ProductClassification\spGetProductClassifications.sql" />
+    <Content Include="DatabaseScript\Procedures\prd\ProductClassification\spGetProductClassification.sql" />
+    <Content Include="DatabaseScript\Procedures\prd\ProductClassification\spModifyProductClassification.sql" />
+    <Content Include="DatabaseScript\Procedures\prd\Tag\spGetTags.sql" />
+    <Content Include="DatabaseScript\Schema.sql" />
+    <Content Include="DatabaseScript\Synonyms\Attachment.sql" />
+    <Content Include="DatabaseScript\Synonyms\Departments.sql" />
+    <Content Include="DatabaseScript\Synonyms\Places.sql" />
+    <Content Include="DatabaseScript\Synonyms\Positions.sql" />
+    <Content Include="DatabaseScript\Synonyms\Users.sql" />
+    <Content Include="DatabaseScript\Synonyms\_Position.sql" />
+    <Content Include="DatabaseScript\Views\_Product.sql" />
+    <Content Include="obj\Debug\TempPE\DatabaseModel1.cs.dll" />
+    <Content Include="obj\Debug\TempPE\DatabaseScript.SpGenerator1.sql.dll" />
+    <None Include="DatabaseScript\devops.bat" />
+    <Compile Include="DatabaseModel1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSources\DataSource.cs" />
+    <Compile Include="DataSources\prd\ProductDataSource.cs" />
+    <Compile Include="DataSources\prd\TagDataSource.cs" />
+    <Compile Include="DataSources\prd\ProductClassificationDataSource.cs" />
+    <Compile Include="DataSources\Public\AttachmentDataSource.cs" />
+    <Compile Include="DataSources\Public\FlowDataSource.cs" />
+    <Compile Include="LayerRegistrar.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DatabaseModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DatabaseModel1.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DatabaseScript\Tables\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kama.Bonyad.Evaluation.Core.DataSource\Kama.Bonyad.Evaluation.Core.DataSource.csproj">
+      <Project>{5a2d42a3-806c-4013-a6cf-9d5a2457d409}</Project>
+      <Name>Kama.Bonyad.Evaluation.Core.DataSource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kama.Bonyad.Evaluation.Core.Model\Kama.Bonyad.Evaluation.Core.Model.csproj">
+      <Project>{88b01b1f-c5e7-405a-8654-7ab42cc0e23d}</Project>
+      <Name>Kama.Bonyad.Evaluation.Core.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kama.Bonyad.Evaluation.Core\Kama.Bonyad.Evaluation.Core.csproj">
+      <Project>{e1c4a24f-196a-4983-8954-d2e9f6b793dc}</Project>
+      <Name>Kama.Bonyad.Evaluation.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

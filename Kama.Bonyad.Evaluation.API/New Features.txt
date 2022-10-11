@@ -1,0 +1,4 @@
+﻿1- SetPhysicalDocumentReceiveDate  added (panel referal)
+2- check panel members in panel referal
+3- collection.ListByPanelReferal Added
+3- Activity added to tax slip

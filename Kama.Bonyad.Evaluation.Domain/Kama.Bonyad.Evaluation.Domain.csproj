@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E678964E-301C-4B8E-A46D-750CA5B754F4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kama.Bonyad.Evaluation.Domain</RootNamespace>
+    <AssemblyName>Kama.Bonyad.Evaluation.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Kama.Bonyad.Evaluation.API\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DeviceDetector.NET, Version=4.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DeviceDetector.NET.4.2.0\lib\netstandard2.0\DeviceDetector.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=4.5.3.3, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.3.3\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="Kama.AppCore, Version=1.1.0.20383, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Kama.Bonyad.Agreement.API\bin\Kama.AppCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Kama.Library.Helper, Version=1.1.0.21072, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Kama.Bonyad.Agreement.API\bin\Kama.Library.Helper.dll</HintPath>
+    </Reference>
+    <Reference Include="Kama.Organization.ApiClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Kama.Bonyad.Agreement.API\bin\Kama.Organization.ApiClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Kama.Organization.Core.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Kama.Bonyad.Agreement.API\bin\Kama.Organization.Core.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="YamlDotNet, Version=8.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
+      <HintPath>..\packages\YamlDotNet.8.1.2\lib\net45\YamlDotNet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LayerRegistrar.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service.cs" />
+    <Compile Include="Services\Organization\DepartmentService.cs" />
+    <Compile Include="Services\Organization\PositionService.cs" />
+    <Compile Include="Services\prd\ProductService.cs" />
+    <Compile Include="Services\prd\TagService.cs" />
+    <Compile Include="Services\prd\ProductClassificationService.cs" />
+    <Compile Include="Services\Public\AttachmentService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kama.Bonyad.Evaluation.Core.DataSource\Kama.Bonyad.Evaluation.Core.DataSource.csproj">
+      <Project>{5a2d42a3-806c-4013-a6cf-9d5a2457d409}</Project>
+      <Name>Kama.Bonyad.Evaluation.Core.DataSource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kama.Bonyad.Evaluation.Core.Model\Kama.Bonyad.Evaluation.Core.Model.csproj">
+      <Project>{88b01b1f-c5e7-405a-8654-7ab42cc0e23d}</Project>
+      <Name>Kama.Bonyad.Evaluation.Core.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kama.Bonyad.Evaluation.Core.Service\Kama.Bonyad.Evaluation.Core.Service.csproj">
+      <Project>{eaeaeb50-799e-42de-bce3-4a3fcbf280f0}</Project>
+      <Name>Kama.Bonyad.Evaluation.Core.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kama.Bonyad.Evaluation.Core\Kama.Bonyad.Evaluation.Core.csproj">
+      <Project>{e1c4a24f-196a-4983-8954-d2e9f6b793dc}</Project>
+      <Name>Kama.Bonyad.Evaluation.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
