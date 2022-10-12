@@ -62,9 +62,7 @@
     <Content Include="DatabaseScript\Functions\date\fnNewClassNumber.sql" />
     <Content Include="DatabaseScript\Functions\date\fnSplitStringList.sql" />
     <Content Include="DatabaseScript\Functions\fnGenerateTrackingCode.sql" />
-    <Content Include="DatabaseScript\Functions\fnGetLastMagistrateMinisterListType.sql" />
     <Content Include="DatabaseScript\Functions\fnNewClassNumber.sql" />
-    <Content Include="DatabaseScript\Functions\fnGetLastOpinionByPositionType.sql" />
     <Content Include="DatabaseScript\Kama.DevOps.exe" />
     <Content Include="DatabaseScript\Procedures\pbl\Attachment\spDeleteAttachment.sql" />
     <Content Include="DatabaseScript\Procedures\pbl\Attachment\spGetAttachment.sql" />

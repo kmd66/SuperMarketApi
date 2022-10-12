@@ -1,4 +1,4 @@
-USE [Kama.SuperMarket]
+USE [Kama.Sm]
 GO
 
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[fnIsLeapYear]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))

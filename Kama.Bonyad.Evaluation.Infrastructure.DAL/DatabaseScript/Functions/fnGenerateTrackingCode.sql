@@ -1,4 +1,4 @@
-USE [Kama.SuperMarket]
+USE [Kama.Sm]
 GO
 
 IF OBJECT_ID('prd.fnGenerateTrackingCode') IS NOT NULL

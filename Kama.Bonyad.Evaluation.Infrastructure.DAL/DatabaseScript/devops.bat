@@ -1,6 +1,6 @@
 @echo off
 
-set connectionString="Data Source=94.139.162.23\sql2019,1433;Initial Catalog=Kama.Bonyad.Evaluation;User ID=kama; Password=K@maPMGs@dUL98"
+set connectionString="Data Source=94.139.162.23;Initial Catalog=Kama.Sm;User ID=kama; Password=kama@@1389"
 
 echo ----------------------------------------- Convert SPs
 rem Kama.DevOps.exe -convertSPs "Procedures" "db-devops"
