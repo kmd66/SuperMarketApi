@@ -78,6 +78,7 @@
     <Compile Include="Services\Organization\DepartmentService.cs" />
     <Compile Include="Services\Organization\PositionService.cs" />
     <Compile Include="Services\prd\ProductService.cs" />
+    <Compile Include="Services\prd\StockService.cs" />
     <Compile Include="Services\prd\TagService.cs" />
     <Compile Include="Services\prd\ProductClassificationService.cs" />
     <Compile Include="Services\Public\AttachmentService.cs" />

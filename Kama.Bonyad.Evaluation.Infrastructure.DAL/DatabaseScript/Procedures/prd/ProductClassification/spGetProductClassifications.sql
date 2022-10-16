@@ -23,8 +23,8 @@ BEGIN
 		@Name NVARCHAR(MAX) = TRIM(@AName),
 		@Comment NVARCHAR(MAX) = TRIM(@AComment),
 		@PageSize INT = COALESCE(@APageSize,1000),
-		@AllChild BIT =@AAllChild,
 		@PageIndex INT = COALESCE(@APageIndex, 1),
+		@AllChild BIT =@AAllChild,
 		@ParentNode HIERARCHYID,
 		@RootLevel int
 	

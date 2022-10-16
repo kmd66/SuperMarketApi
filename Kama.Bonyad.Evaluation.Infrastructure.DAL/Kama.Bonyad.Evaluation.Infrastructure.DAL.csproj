@@ -74,6 +74,10 @@
     <Content Include="DatabaseScript\Procedures\prd\Document\spGetDocument.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Document\spGetDocuments.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Document\spModifyDocument.sql" />
+    <Content Include="DatabaseScript\Procedures\prd\Stock\spIndexCountStock.sql" />
+    <Content Include="DatabaseScript\Procedures\prd\Stock\spGetStock.sql" />
+    <Content Include="DatabaseScript\Procedures\prd\Stock\spGetStocks.sql" />
+    <Content Include="DatabaseScript\Procedures\prd\Stock\spAddStock.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Tag\spDeleteTag.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Tag\spAddTag.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Product\spDeleteProduct.sql" />
@@ -103,6 +107,7 @@
     </Compile>
     <Compile Include="DataSources\DataSource.cs" />
     <Compile Include="DataSources\prd\ProductDataSource.cs" />
+    <Compile Include="DataSources\prd\StockDataSource.cs" />
     <Compile Include="DataSources\prd\TagDataSource.cs" />
     <Compile Include="DataSources\prd\ProductClassificationDataSource.cs" />
     <Compile Include="DataSources\Public\AttachmentDataSource.cs" />

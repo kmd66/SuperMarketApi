@@ -155,6 +155,37 @@ namespace Kama.Bonyad.Evaluation.ApiClient
 
             		 }
   
+		 partial class StockService: Service, IStockService
+		 {
+			public StockService(IEvaluationClient client)
+			{
+				_client = client;
+			}
+			readonly IEvaluationClient _client;
+
+			            public virtual Task<AppCore.Result<Kama.Bonyad.Evaluation.Core.Model.Stock>> Add( Kama.Bonyad.Evaluation.Core.Model.Stock model, IDictionary<string, string> httpHeaders = null)
+			{
+						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
+			const string url = "api/v1/Stock/Add";
+							return _client.SendAsync<Kama.Bonyad.Evaluation.Core.Model.Stock>(true, url, routeParamValues, httpHeaders, model);
+						}
+
+                        public virtual Task<AppCore.Result<IEnumerable<Kama.Bonyad.Evaluation.Core.Model.Stock>>> Get( Kama.Bonyad.Evaluation.Core.Model.Stock model, IDictionary<string, string> httpHeaders = null)
+			{
+						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
+			const string url = "api/v1/Stock/Get";
+							return _client.SendAsync<IEnumerable<Kama.Bonyad.Evaluation.Core.Model.Stock>>(true, url, routeParamValues, httpHeaders, model);
+						}
+
+                        public virtual Task<AppCore.Result<IEnumerable<Kama.Bonyad.Evaluation.Core.Model.Stock>>> List( Kama.Bonyad.Evaluation.Core.Model.Stock model, IDictionary<string, string> httpHeaders = null)
+			{
+						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
+			const string url = "api/v1/Stock/List";
+							return _client.SendAsync<IEnumerable<Kama.Bonyad.Evaluation.Core.Model.Stock>>(true, url, routeParamValues, httpHeaders, model);
+						}
+
+            		 }
+  
 		 partial class TagService: Service, ITagService
 		 {
 			public TagService(IEvaluationClient client)

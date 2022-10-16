@@ -69,6 +69,16 @@ namespace Kama.Bonyad.Evaluation.ApiClient.Interface
 
 					 }
 
+  		 public interface IStockService: IService
+		 {
+						 				Task<AppCore.Result<model.Stock>> Add(model.Stock model, IDictionary<string, string> httpHeaders = null);
+
+						 				Task<AppCore.Result<IEnumerable<model.Stock>>> Get(model.Stock model, IDictionary<string, string> httpHeaders = null);
+
+						 				Task<AppCore.Result<IEnumerable<model.Stock>>> List(model.Stock model, IDictionary<string, string> httpHeaders = null);
+
+					 }
+
   		 public interface ITagService: IService
 		 {
 						 				Task<AppCore.Result<model.Tag>> Add(model.Tag model, IDictionary<string, string> httpHeaders = null);

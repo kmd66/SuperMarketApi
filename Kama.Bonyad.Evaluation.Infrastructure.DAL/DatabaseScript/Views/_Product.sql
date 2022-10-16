@@ -20,6 +20,7 @@ AS
 			prd.Information,
 			prd.CreateDate,
 			prc.GuID ClassificationGuID,
+			prc.ID ClassificationID,
 			prc.Name ClassificationName
 		FROM prd.Product prd
 		INNER JOIN [prd].[ProductClassification] prc 
