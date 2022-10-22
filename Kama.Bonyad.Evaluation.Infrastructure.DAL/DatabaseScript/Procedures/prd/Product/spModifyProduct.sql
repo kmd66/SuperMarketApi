@@ -41,6 +41,7 @@ BEGIN
 				([GuID], ParentID, [Name], Comment, Price, Discount, Information, CreateDate)
 			VALUES
 				(@AGuID, @ParentID, @Name, @Comment, @Price, @Discount, @Information, GETDATE())
+			EXEC prd.spIndexCountStock
 		END
 		ELSE
 		BEGIN -- update

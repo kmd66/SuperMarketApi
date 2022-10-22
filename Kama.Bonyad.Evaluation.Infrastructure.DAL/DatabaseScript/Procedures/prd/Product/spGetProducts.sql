@@ -41,7 +41,7 @@ BEGIN
 		AND(@Comment IS NULL OR Comment LIKE '%' + @Comment + '%')
 		AND (@StartPrice = 0 OR Price >= @StartPrice)
 		AND (@EndPrice = 0 OR Price <= @EndPrice)
-	ORDER BY CreateDate
+	ORDER BY CreateDate DESC
 	OFFSET ((@PageIndex - 1) * @PageSize) ROWS FETCH NEXT @PageSize ROWS ONLY
 
 END
