@@ -9,7 +9,7 @@
 <#@ import namespace="Kama.Bonyad.Evaluation.Core.Model" #>
 <#@ output extension=".cs" #>
 <#
-	// var generator = new Kama.DatabaseModel.Generator(@"Data Source=94.139.162.23;Initial Catalog=Kama.Sm;User ID=kama; Password=kama@@1389", "dbo");
-	var generator = new Kama.DatabaseModel.Generator(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Kama.Sm;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False", "dbo");
+	var generator = new Kama.DatabaseModel.Generator(@"Data Source=94.139.162.23;Initial Catalog=Kama.Sm;User ID=kama; Password=kama@@1389", "dbo");
+	// var generator = new Kama.DatabaseModel.Generator(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Kama.Sm;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False", "dbo");
 #>
 <#=generator.Generate("Kama.Bonyad.Evaluation.Infrastructure.DAL")#>

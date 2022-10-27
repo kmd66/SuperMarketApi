@@ -28,6 +28,31 @@ namespace Kama.Bonyad.Evaluation.Domain.Services
             return await _dataSource.AddAsync(model, guid);
         }
 
+        public async Task<AppCore.Result> AddListAsync(List<Stock> model)
+        {
+            if(model.Count == 0 || model.Count > 20)
+                return AppCore.Result<Stock>.Failure(message: "modelCount null");
+
+            foreach (var item in model)
+            {
+                var validation = await _ValidateForSave(item);
+                if (!validation.Success)
+                    return AppCore.Result<Stock>.Failure(message: validation.Message);
+            }
+
+            List<List<Guid>> guids = new List<List<Guid>>();
+            foreach (var item in model)
+            {
+                List<Guid> guid = new List<Guid>();
+                for (int i = 0; i < item.Count; i++)
+                    guid.Add(Guid.NewGuid());
+                guids.Add(guid);
+            }
+
+
+            return await _dataSource.AddListAsync(model, guids);
+        }
+
         public Task<AppCore.Result<IEnumerable<Stock>>> GetAsync(Stock model)
             => _dataSource.GetAsync(model);
 
@@ -36,9 +61,9 @@ namespace Kama.Bonyad.Evaluation.Domain.Services
 
         private async Task<AppCore.Result<Stock>> _ValidateForSave(Stock model)
         {
-            if (model.Count == 0)
+            if (model.Count <= 0)
                 return AppCore.Result<Stock>.Failure(message: "Count null");
-            if (model.ID == 0)
+            if (model.ID <= 0)
                 return AppCore.Result<Stock>.Failure(message: "ID null");
 
             return AppCore.Result<Stock>.Successful();

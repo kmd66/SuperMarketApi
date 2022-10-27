@@ -20,6 +20,10 @@ namespace Kama.Bonyad.Evaluation.API.Controllers
         public Task<Result<Stock>> Add(Stock model)
             => _service.AddAsync(model);
 
+        [HttpPost, Route("AddList")]
+        public Task<Result> AddList(List<Stock> model)
+            => _service.AddListAsync(model);
+
         [HttpPost, Route("Get")]
         public Task<Result<IEnumerable<Stock>>> Get(Stock model)
             => _service.GetAsync(model);

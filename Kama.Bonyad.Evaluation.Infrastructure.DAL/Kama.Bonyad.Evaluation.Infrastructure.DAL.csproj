@@ -52,7 +52,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DatabaseModel.cs" />
     <Content Include="DatabaseScript\Functions\date\fnGetLastDateOfJalaliMonth.sql" />
     <Content Include="DatabaseScript\Functions\date\fnGetFirstDateOfJalaliMonth.sql" />
     <Content Include="DatabaseScript\Functions\date\fnJalaliToGregorian.sql" />

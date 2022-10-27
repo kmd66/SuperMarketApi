@@ -8,7 +8,8 @@ GO
 CREATE PROCEDURE prd.spAddStock
 	@AID BIGINT,
 	@ACreatorID UNIQUEIDENTIFIER,
-	@AGuIDS NVARCHAR(MAX)
+	@AGuIDS NVARCHAR(MAX),
+	@AIsEXECspIndexCountStock BIT
 WITH ENCRYPTION
 AS
 BEGIN
@@ -19,6 +20,7 @@ BEGIN
 		@ID  BIGINT = @AID ,
 		@CreatorID  UNIQUEIDENTIFIER = @ACreatorID ,
 		@GuIDS NVARCHAR(MAX) = TRIM(@AGuIDS),
+		@IsEXECspIndexCountStock BIT = @AIsEXECspIndexCountStock,
 		@Date DATETIME = GETDATE(),
 		@LastID  BIGINT
 
@@ -38,7 +40,11 @@ BEGIN
 		FROM OPENJSON(@GuIDS) jsn
 		INNER JOIN [prd].[Document] doc ON doc.GuID = jsn.VALUE
 
-		EXEC prd.spIndexCountStock
+		IF @IsEXECspIndexCountStock = 1
+		BEGIN
+			EXEC prd.spIndexCountStock
+		END
+
 
 		COMMIT
 	END TRY

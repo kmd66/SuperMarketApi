@@ -22,7 +22,8 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
                 var result = (await _dbPRD.AddStockAsync(
                     _creatorID:_requestInfo.PositionId,
                     _id: model.ID,
-                    _guIDS: _objSerializer.Serialize(ids)
+                    _guIDS: _objSerializer.Serialize(ids),
+                    _isEXECspIndexCountStock: true
                     )).ToActionResult<Stock>();
 
                 return result;
@@ -33,17 +34,28 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
             }
         }
 
-        public async Task<Result<Stock>> AddListAsync(Stock model, List<Guid> ids)
+        public async Task<Result> AddListAsync(List<Stock> model, List<List<Guid>> listIds)
         {
             try
             {
-                var result = (await _dbPRD.AddStockAsync(
-                    _creatorID: _requestInfo.PositionId,
-                    _id: model.ID,
-                    _guIDS: _objSerializer.Serialize(ids)
-                    )).ToActionResult<Stock>();
+                var commands = new List<SqlCommand>();
+                
+                int row = 0;
+                foreach (var item in model)
+                {
+                    var ids = listIds[row];
+                    commands.Add(_dbPRD.GetCommand_AddStock(
+                        _creatorID: _requestInfo.PositionId,
+                        _id: item.ID,
+                        _guIDS: _objSerializer.Serialize(ids),
+                        _isEXECspIndexCountStock: row +1 == model.Count?true:false
+                        ));
+                    row++;
+                }
 
-                return result;
+                await _dbPRD.BatchExcuteAsync(commands.ToArray());
+
+                return Result.Successful();
             }
             catch (Exception e)
             {

@@ -9,7 +9,7 @@ namespace Kama.Bonyad.Evaluation.Core.Service
     public interface IStockService : IService
     {
         Task<Result<Stock>> AddAsync(Stock model);
-
+        Task<AppCore.Result> AddListAsync(List<Stock> model);
         Task<Result<IEnumerable<Stock>>> GetAsync(Stock model);
 
         Task<Result<IEnumerable<Stock>>> ListAsync(Stock model);

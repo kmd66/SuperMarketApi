@@ -170,6 +170,13 @@ namespace Kama.Bonyad.Evaluation.ApiClient
 							return _client.SendAsync<Kama.Bonyad.Evaluation.Core.Model.Stock>(true, url, routeParamValues, httpHeaders, model);
 						}
 
+                        public virtual Task<AppCore.Result> AddList( List<Kama.Bonyad.Evaluation.Core.Model.Stock> model, IDictionary<string, string> httpHeaders = null)
+			{
+						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
+			const string url = "api/v1/Stock/AddList";
+							return _client.SendAsync(true, url, routeParamValues, httpHeaders, model);
+						}
+
                         public virtual Task<AppCore.Result<IEnumerable<Kama.Bonyad.Evaluation.Core.Model.Stock>>> Get( Kama.Bonyad.Evaluation.Core.Model.Stock model, IDictionary<string, string> httpHeaders = null)
 			{
 						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
