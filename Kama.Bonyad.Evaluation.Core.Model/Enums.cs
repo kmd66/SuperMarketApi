@@ -37,10 +37,19 @@ namespace Kama.Bonyad.Evaluation.Core.Model
         ارسال_توسط_سیستم = 250
     }
 
-    public enum AttachmentType : short
+    public enum AttachmentType : byte
     {
         Unknown = 0,
         تصویر_دسته_بندی = 1,
         تصویر_دسته_کالا = 2,
+    }
+
+    public enum UnitOfMeasureType : byte
+    {
+        Unknown = 0,
+        عدد = 1,
+        بسته = 2,
+        کیلو = 3,
+        متر = 4,
     }
 }

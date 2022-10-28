@@ -14,7 +14,8 @@ CREATE PROCEDURE prd.spModifyProduct
 	@AComment NVARCHAR(MAX),
 	@APrice BIGINT,
 	@ADiscount BIGINT,
-	@AInformation NVARCHAR(MAX)
+	@AInformation NVARCHAR(MAX),
+	@AUnitOfMeasure TINYINT
 WITH ENCRYPTION
 AS
 BEGIN
@@ -30,7 +31,8 @@ BEGIN
 		@Comment NVARCHAR(MAX) = TRIM(@AComment),
 		@Price BIGINT = @APrice,
 		@Discount BIGINT = @ADiscount,
-		@Information NVARCHAR(MAX) = TRIM(@AInformation)
+		@Information NVARCHAR(MAX) = TRIM(@AInformation),
+		@UnitOfMeasure TINYINT =@AUnitOfMeasure 
 
 	BEGIN TRY
 		BEGIN TRAN
@@ -38,15 +40,15 @@ BEGIN
 		IF @IsNewRecord = 1 -- insert
 		BEGIN
 			INSERT INTO prd.Product
-				([GuID], ParentID, [Name], Comment, Price, Discount, Information, CreateDate)
+				([GuID], ParentID, [Name], Comment, Price, Discount, Information, CreateDate, UnitOfMeasure)
 			VALUES
-				(@AGuID, @ParentID, @Name, @Comment, @Price, @Discount, @Information, GETDATE())
+				(@AGuID, @ParentID, @Name, @Comment, @Price, @Discount, @Information, GETDATE(), @UnitOfMeasure)
 			EXEC prd.spIndexCountStock
 		END
 		ELSE
 		BEGIN -- update
 			UPDATE prd.Product
-			SET ParentID=@ParentID,[Name] = @Name, Comment = @Comment, Price = @Price, Discount = @Discount, Information = @AInformation
+			SET ParentID=@ParentID,[Name] = @Name, Comment = @Comment, Price = @Price, Discount = @Discount, Information = @AInformation, UnitOfMeasure=@UnitOfMeasure
 			WHERE ID = @ID
 
 		END

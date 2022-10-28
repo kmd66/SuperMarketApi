@@ -53,6 +53,8 @@ namespace Kama.Bonyad.Evaluation.Domain.Services
                 return AppCore.Result<Product>.Failure(message: "قیمت وارد نشده است");
             if (model.Price < model.Discount)
                 return AppCore.Result<Product>.Failure(message: "قیمت کمتر از تخفیف است");
+            if (model.UnitOfMeasure == UnitOfMeasureType.Unknown)
+                return AppCore.Result<Product>.Failure(message: "واحد اندازه گیری وارد نشده است");
 
             if (string.IsNullOrEmpty(model.Information))
                 model.Information = "{}";

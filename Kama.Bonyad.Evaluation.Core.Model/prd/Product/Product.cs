@@ -12,6 +12,7 @@ namespace Kama.Bonyad.Evaluation.Core.Model
         public long Discount { get; set; }
         public string Information { get; set; }
         public DateTime CreateDate { get; set; }
+        public UnitOfMeasureType UnitOfMeasure { get; set; }
         public Guid ClassificationGuID { get; set; }
         public string ClassificationName { get; set; }
         public Attachment Attachment { get; set; }

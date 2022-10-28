@@ -31,7 +31,8 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
                     _id:model.ID,
                     _discount:model.Discount,
                     _price:model.Price,
-                    _information:model.Information
+                    _information:model.Information,
+                    _unitOfMeasure:(byte)model.UnitOfMeasure
                     )).ToActionResult<Core.Model.Product>();
 
                 if (result.Success)

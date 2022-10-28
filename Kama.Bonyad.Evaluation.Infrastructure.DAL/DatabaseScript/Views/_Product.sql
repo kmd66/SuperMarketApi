@@ -19,6 +19,7 @@ AS
 			prd.Discount, 
 			prd.Information,
 			prd.CreateDate,
+			prd.[UnitOfMeasure],
 			prc.GuID ClassificationGuID,
 			prc.ID ClassificationID,
 			prc.Name ClassificationName
