@@ -55,6 +55,20 @@ namespace Kama.Bonyad.Evaluation.ApiClient.Interface
 
 					 }
 
+  		 public interface IBrandService: IService
+		 {
+						 				Task<AppCore.Result<model.Brand>> Add(model.Brand model, IDictionary<string, string> httpHeaders = null);
+
+						 				Task<AppCore.Result<model.Brand>> Edit(model.Brand model, IDictionary<string, string> httpHeaders = null);
+
+						 				Task<AppCore.Result> Delete(model.Brand model, IDictionary<string, string> httpHeaders = null);
+
+						 				Task<AppCore.Result<model.Brand>> Get(model.Brand model, IDictionary<string, string> httpHeaders = null);
+
+						 				Task<AppCore.Result<IEnumerable<model.Brand>>> List(model.BrandVM model, IDictionary<string, string> httpHeaders = null);
+
+					 }
+
   		 public interface IProductService: IService
 		 {
 						 				Task<AppCore.Result<model.Product>> Add(model.Product model, IDictionary<string, string> httpHeaders = null);

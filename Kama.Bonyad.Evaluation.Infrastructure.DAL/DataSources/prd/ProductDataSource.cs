@@ -32,7 +32,9 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
                     _discount:model.Discount,
                     _price:model.Price,
                     _information:model.Information,
-                    _unitOfMeasure:(byte)model.UnitOfMeasure
+                    _unitOfMeasure:(byte)model.UnitOfMeasure,
+                    _minimumToAlert: model.MinimumToAlert,
+                    _brandID:model.BrandID
                     )).ToActionResult<Core.Model.Product>();
 
                 if (result.Success)

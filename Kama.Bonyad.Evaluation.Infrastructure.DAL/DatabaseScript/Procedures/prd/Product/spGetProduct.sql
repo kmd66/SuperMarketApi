@@ -20,7 +20,7 @@ BEGIN
 	
 	SELECT *
 	FROM prd._Product
-	WHERE ([ID] <> 0 AND [ID] = @ID)
-		OR ([GuID] IS NOT NULL AND [GuID] = @GuID)
+	WHERE (@ID <> 0 AND [ID] = @ID)
+		OR (@GuID IS NOT NULL AND [GuID] = @GuID)
 
 END

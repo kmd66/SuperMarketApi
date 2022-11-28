@@ -16,6 +16,9 @@ namespace Kama.Bonyad.Evaluation.Core.Model
         public Guid ClassificationGuID { get; set; }
         public string ClassificationName { get; set; }
         public Attachment Attachment { get; set; }
+        public int MinimumToAlert { get; set; }
+        public long BrandID { get; set; }
+        public string BrandName { get; set; }
     }
 }
 

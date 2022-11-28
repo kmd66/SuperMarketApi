@@ -9,9 +9,6 @@ CREATE PROCEDURE prd.spGetProductClassifications
 	@AParentID UNIQUEIDENTIFIER,
 	@AName NVARCHAR(MAX),
 	@AComment NVARCHAR(MAX),
-	@AAllChild BIT,
-	@AFirstNode BIT,
-	@ALastNode BIT,
 	@APageSize INT,
 	@APageIndex INT
 WITH ENCRYPTION
@@ -26,11 +23,10 @@ BEGIN
 		@Comment NVARCHAR(MAX) = TRIM(@AComment),
 		@PageSize INT = COALESCE(@APageSize,1000),
 		@PageIndex INT = COALESCE(@APageIndex, 1),
-		@AllChild BIT =@AAllChild,
-		@FirstNode BIT =@AFirstNode,
-		@LastNode BIT =@ALastNode,
 		@ParentNode HIERARCHYID,
 		@RootLevel int
+	
+	
 	
 	
 	IF @ParentID IS NOT NULL
@@ -51,25 +47,16 @@ BEGIN
 			AND(@Name IS NULL OR [Name] LIKE '%' + @Name + '%')
 			AND(@Comment IS NULL OR Comment LIKE '%' + @Comment + '%')
 			AND(@ParentNode IS NULL OR [Node].IsDescendantOf(@ParentNode) = 1)
-	) 
-	,FiltterNode AS
-	(
-		SELECT *
-		FROM MainSelect
-		WHERE (@AllChild = 1 OR @RootLevel IS NULL OR [Node].GetLevel()= @RootLevel + 1)
-			AND(@FirstNode = 0 OR [Node].GetLevel() = 1 )
-			AND(@LastNode = 0 
-				OR  ([Node].GetDescendant(null, null) NOT IN (SELECT [Node] FROM  prd.ProductClassification) 
-				AND [Node].GetLevel() <> 1 )
-			)
+			AND  [Node].GetDescendant(null, null) NOT IN (SELECT [Node] FROM  prd.ProductClassification) 
+			AND [Node].GetLevel() <> 1
 	)
 	SELECT
-		FiltterNode.Total, FiltterNode.ID, FiltterNode.[GuID], FiltterNode.[Name], FiltterNode.Comment, FiltterNode.NodeString, 
+		MainSelect.Total, MainSelect.ID, MainSelect.[GuID], MainSelect.[Name], MainSelect.Comment, MainSelect.NodeString, 
 		p.GuID ParentID,
 		p.[Name] ParentName
-	FROM FiltterNode
-	LEFT JOIN prd.ProductClassification p on p.Node = FiltterNode.Node.GetAncestor(1)
-	ORDER BY FiltterNode.[Node]
+	FROM MainSelect
+	LEFT JOIN prd.ProductClassification p on p.Node = MainSelect.Node.GetAncestor(1)
+	ORDER BY MainSelect.[Node]
 	OFFSET ((@PageIndex - 1) * @PageSize) ROWS FETCH NEXT @PageSize ROWS ONLY;
 
 END

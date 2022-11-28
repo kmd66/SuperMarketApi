@@ -94,6 +94,8 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
                     _name:model.Name,
                     _comment: model.Comment,
                     _allChild:model.AllChild,
+                    _firstNode:model.FirstNode,
+                    _lastNode: model.LastNode,
                     _pageIndex:model.PageIndex,
                     _pageSize: model.PageSize
                     

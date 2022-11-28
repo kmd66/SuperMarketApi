@@ -8,6 +8,8 @@ namespace Kama.Bonyad.Evaluation.Core.Model
         public string Name { get; set; }
         public string Comment { get; set; }
         public bool AllChild { get; set; }
+        public bool FirstNode { get; set; }
+        public bool LastNode { get; set; }
         public bool IsAttachment { get; set; }
     }
 }

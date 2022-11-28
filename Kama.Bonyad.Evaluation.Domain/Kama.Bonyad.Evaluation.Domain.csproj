@@ -82,6 +82,7 @@
     <Compile Include="Services\prd\TagService.cs" />
     <Compile Include="Services\prd\ProductClassificationService.cs" />
     <Compile Include="Services\Public\AttachmentService.cs" />
+    <Compile Include="Services\Public\BrandService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

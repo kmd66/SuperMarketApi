@@ -17,7 +17,7 @@ namespace Kama.Bonyad.Evaluation.Domain.Services
 
         public async Task<AppCore.Result<Product>> AddAsync(Product model)
         {
-            var validation = await _ValidateForSave(model);
+            var validation = await _ValidateForSave(model, true);
             if (!validation.Success)
                 return AppCore.Result<Product>.Failure(message: validation.Message);
             return await _dataSource.AddAsync(model);
@@ -25,7 +25,7 @@ namespace Kama.Bonyad.Evaluation.Domain.Services
 
         public Task<AppCore.Result<Product>> EditAsync(Product model)
         {
-            var validation = _ValidateForSave(model);
+            var validation = _ValidateForSave(model,false);
             if (!validation.Result.Success)
                 return AppCore.Result<Product>.FailureAsync(message: validation.Result.Message);
 
@@ -41,20 +41,23 @@ namespace Kama.Bonyad.Evaluation.Domain.Services
         public Task<AppCore.Result<IEnumerable<Product>>> ListAsync(ProductVM model)
             => _dataSource.ListAsync(model);
 
-        private async Task<AppCore.Result<Product>> _ValidateForSave(Product model)
+        private async Task<AppCore.Result<Product>> _ValidateForSave(Product model,bool addState)
         {
             if (string.IsNullOrEmpty(model.Name))
                 return AppCore.Result<Product>.Failure(message: "نام وارد نشده است");
             if (string.IsNullOrEmpty(model.Comment))
                 return AppCore.Result<Product>.Failure(message: "توضیح وارد نشده است");
-            if (model.ParentID == 0)
-                return AppCore.Result<Product>.Failure(message: "والد وارد نشده است");
             if (model.Price == 0)
                 return AppCore.Result<Product>.Failure(message: "قیمت وارد نشده است");
             if (model.Price < model.Discount)
                 return AppCore.Result<Product>.Failure(message: "قیمت کمتر از تخفیف است");
             if (model.UnitOfMeasure == UnitOfMeasureType.Unknown)
                 return AppCore.Result<Product>.Failure(message: "واحد اندازه گیری وارد نشده است");
+
+            if (model.BrandID == 0 && addState)
+                return AppCore.Result<Product>.Failure(message: "برند وارد نشده است");
+            if (model.ParentID == 0 && addState)
+                return AppCore.Result<Product>.Failure(message: "والد وارد نشده است");
 
             if (string.IsNullOrEmpty(model.Information))
                 model.Information = "{}";

@@ -69,6 +69,10 @@
     <Content Include="DatabaseScript\Procedures\pbl\Attachment\spModifyAttachment.sql" />
     <Content Include="DatabaseScript\Procedures\pbl\Flow\spAddFlow.sql" />
     <Content Include="DatabaseScript\Procedures\pbl\Flow\spGetFlows.sql" />
+    <Content Include="DatabaseScript\Procedures\pbl\Brand\spDeleteBrand.sql" />
+    <Content Include="DatabaseScript\Procedures\pbl\Brand\spGetBrand.sql" />
+    <Content Include="DatabaseScript\Procedures\pbl\Brand\spGetBrands.sql" />
+    <Content Include="DatabaseScript\Procedures\pbl\Brand\spModifyBrand.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Document\spDeleteDocument.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Document\spGetDocument.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Document\spGetDocuments.sql" />
@@ -111,6 +115,7 @@
     <Compile Include="DataSources\prd\ProductClassificationDataSource.cs" />
     <Compile Include="DataSources\Public\AttachmentDataSource.cs" />
     <Compile Include="DataSources\Public\FlowDataSource.cs" />
+    <Compile Include="DataSources\Public\BrandDataSource.cs" />
     <Compile Include="LayerRegistrar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

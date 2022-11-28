@@ -56,6 +56,7 @@
     <Compile Include="prd\IProductClassificationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Public\IAttachmentService.cs" />
+    <Compile Include="Public\IBrandService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kama.Bonyad.Evaluation.Core.Model\Kama.Bonyad.Evaluation.Core.Model.csproj">

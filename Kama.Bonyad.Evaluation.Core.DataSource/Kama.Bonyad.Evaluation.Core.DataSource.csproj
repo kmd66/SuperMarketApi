@@ -58,6 +58,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Public\IAttachmentDataSource.cs" />
     <Compile Include="Public\IFlowDataSource.cs" />
+    <Compile Include="Public\IBrandDataSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

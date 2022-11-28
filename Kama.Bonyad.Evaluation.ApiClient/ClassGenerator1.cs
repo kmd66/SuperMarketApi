@@ -110,6 +110,51 @@ namespace Kama.Bonyad.Evaluation.ApiClient
 
             		 }
   
+		 partial class BrandService: Service, IBrandService
+		 {
+			public BrandService(IEvaluationClient client)
+			{
+				_client = client;
+			}
+			readonly IEvaluationClient _client;
+
+			            public virtual Task<AppCore.Result<Kama.Bonyad.Evaluation.Core.Model.Brand>> Add( Kama.Bonyad.Evaluation.Core.Model.Brand model, IDictionary<string, string> httpHeaders = null)
+			{
+						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
+			const string url = "api/v1/Brand/Add";
+							return _client.SendAsync<Kama.Bonyad.Evaluation.Core.Model.Brand>(true, url, routeParamValues, httpHeaders, model);
+						}
+
+                        public virtual Task<AppCore.Result<Kama.Bonyad.Evaluation.Core.Model.Brand>> Edit( Kama.Bonyad.Evaluation.Core.Model.Brand model, IDictionary<string, string> httpHeaders = null)
+			{
+						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
+			const string url = "api/v1/Brand/Edit";
+							return _client.SendAsync<Kama.Bonyad.Evaluation.Core.Model.Brand>(true, url, routeParamValues, httpHeaders, model);
+						}
+
+                        public virtual Task<AppCore.Result> Delete( Kama.Bonyad.Evaluation.Core.Model.Brand model, IDictionary<string, string> httpHeaders = null)
+			{
+						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
+			const string url = "api/v1/Brand/Delete";
+							return _client.SendAsync(true, url, routeParamValues, httpHeaders, model);
+						}
+
+                        public virtual Task<AppCore.Result<Kama.Bonyad.Evaluation.Core.Model.Brand>> Get( Kama.Bonyad.Evaluation.Core.Model.Brand model, IDictionary<string, string> httpHeaders = null)
+			{
+						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
+			const string url = "api/v1/Brand/Get";
+							return _client.SendAsync<Kama.Bonyad.Evaluation.Core.Model.Brand>(true, url, routeParamValues, httpHeaders, model);
+						}
+
+                        public virtual Task<AppCore.Result<IEnumerable<Kama.Bonyad.Evaluation.Core.Model.Brand>>> List( Kama.Bonyad.Evaluation.Core.Model.BrandVM model, IDictionary<string, string> httpHeaders = null)
+			{
+						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
+			const string url = "api/v1/Brand/List";
+							return _client.SendAsync<IEnumerable<Kama.Bonyad.Evaluation.Core.Model.Brand>>(true, url, routeParamValues, httpHeaders, model);
+						}
+
+            		 }
+  
 		 partial class ProductService: Service, IProductService
 		 {
 			public ProductService(IEvaluationClient client)

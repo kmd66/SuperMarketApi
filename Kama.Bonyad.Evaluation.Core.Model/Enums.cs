@@ -18,7 +18,11 @@ namespace Kama.Bonyad.Evaluation.Core.Model
     public enum DocState : byte
     {
         Unknown = 0,
-        انبار = 1
+        انبار = 1,
+        فروش_حضوری = 100,
+        انقضا = 240,
+        مرجوع = 241,
+        دورریز = 242
     }
     public enum OpinionType : byte
     {

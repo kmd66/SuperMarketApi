@@ -73,6 +73,8 @@
     <Compile Include="ModelGuID.cs" />
     <Compile Include="Organization\Auth.cs" />
     <Compile Include="Organization\Position.cs" />
+    <Compile Include="pbl\Brand\Brand.cs" />
+    <Compile Include="pbl\Brand\BrandVM.cs" />
     <Compile Include="prd\Product\Product.cs" />
     <Compile Include="prd\Product\ProductVM.cs" />
     <Compile Include="prd\ProductClassification\ProductClassification.cs" />

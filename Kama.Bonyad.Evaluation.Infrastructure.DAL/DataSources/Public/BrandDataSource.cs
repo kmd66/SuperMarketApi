@@ -1,0 +1,106 @@
+﻿using Kama.AppCore;
+using Kama.Bonyad.Evaluation.Core.Model;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
+{
+    class BrandDataSource : DataSource, Core.DataSource.IBrandDataSource
+    {
+        public BrandDataSource(AppCore.IOC.IContainer container
+            , Core.DataSource.IAttachmentDataSource attachmentDataSource)
+            : base(container)
+        {
+            _attachmentDataSource = attachmentDataSource;
+        }
+        Core.DataSource.IAttachmentDataSource _attachmentDataSource;
+
+        private async Task<AppCore.Result<Core.Model.Brand>> ModifyAsync(bool isNewRecord, Brand model)
+        {
+            try
+            {
+                var result = (await _dbPBL.ModifyBrandAsync(
+                    _isNewRecord: isNewRecord,
+                    _guID:model.GuID,
+                    _name:model.Name,
+                    _parentID:model.ParentID,
+                    _id:model.ID
+                    )).ToActionResult<Core.Model.Brand>();
+
+                if (result.Success)
+                    return await GetAsync(new Brand { GuID= model.GuID });
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                return LogError<Core.Model.Brand>(e);
+            }
+        }
+
+        public Task<Result<Brand>> AddAsync(Brand model)
+        {
+            model.GuID = Guid.NewGuid();
+            return ModifyAsync(true, model);
+        }
+
+        public Task<Result<Brand>> EditAsync(Brand model)
+            => ModifyAsync(false, model);
+
+        public async Task<Result> DeleteAsync(Brand model)
+        {
+            try
+            {
+                var result = (await _dbPBL.DeleteBrandAsync(_id: model.ID))
+                                    .ToActionResult(); 
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+        public async Task<Result<Brand>> GetAsync(Brand model)
+        {
+            try
+            {
+                var result = (await _dbPBL.GetBrandAsync(
+                    _id: model.ID,
+                    _guID: model.GuID
+                    )).ToActionResult<Brand>();
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+        public async Task<Result<IEnumerable<Brand>>> ListAsync(BrandVM model)
+        {
+            try
+            {
+                var result = (await _dbPBL.GetBrandsAsync(
+                    _parentID: model.ParentID,
+                    _name:model.Name,
+                    _pageIndex:model.PageIndex,
+                    _pageSize: model.PageSize
+                    
+                    )).ToListActionResult<Brand>();
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+    }
+}
