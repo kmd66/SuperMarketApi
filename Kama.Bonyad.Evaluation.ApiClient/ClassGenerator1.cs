@@ -229,11 +229,18 @@ namespace Kama.Bonyad.Evaluation.ApiClient
 							return _client.SendAsync<IEnumerable<Kama.Bonyad.Evaluation.Core.Model.Stock>>(true, url, routeParamValues, httpHeaders, model);
 						}
 
-                        public virtual Task<AppCore.Result<IEnumerable<Kama.Bonyad.Evaluation.Core.Model.Stock>>> List( Kama.Bonyad.Evaluation.Core.Model.Stock model, IDictionary<string, string> httpHeaders = null)
+                        public virtual Task<AppCore.Result<IEnumerable<Kama.Bonyad.Evaluation.Core.Model.Stock>>> List( Kama.Bonyad.Evaluation.Core.Model.StockVM model, IDictionary<string, string> httpHeaders = null)
 			{
 						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
 			const string url = "api/v1/Stock/List";
 							return _client.SendAsync<IEnumerable<Kama.Bonyad.Evaluation.Core.Model.Stock>>(true, url, routeParamValues, httpHeaders, model);
+						}
+
+                        public virtual Task<AppCore.Result> ChangeState( Kama.Bonyad.Evaluation.Core.Model.StockChengState model, IDictionary<string, string> httpHeaders = null)
+			{
+						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
+			const string url = "api/v1/Stock/ChangeState";
+							return _client.SendAsync(true, url, routeParamValues, httpHeaders, model);
 						}
 
             		 }

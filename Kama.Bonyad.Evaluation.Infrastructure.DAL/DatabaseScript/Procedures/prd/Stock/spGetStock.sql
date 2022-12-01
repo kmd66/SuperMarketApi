@@ -21,9 +21,10 @@ BEGIN
 		ID, 
 		CreatorID, 
 		[Date],
+		Expired,
 		FromPositionName
 	FROM PRD.IndexCountStock
-	WHERE ID = @ID 
+	WHERE ID = @ID AND Count> 0
 	ORDER BY [Date] DESC
 
 END

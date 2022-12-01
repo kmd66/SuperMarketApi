@@ -25,6 +25,8 @@ BEGIN
 			prd.ClassificationName,
 			doc.CreatorID, 
 			doc.CreationDate [Date],
+			doc.Expired,
+			flw.ToState [State],
 			FrPos.ID FrPosID,
 			COALESCE(FrPos.FirstName,'')+ ' '+COALESCE(FrPos.LastName,' ')  FromPositionName,
 			ToPos.ID ToPosID,
@@ -32,7 +34,7 @@ BEGIN
 		FROM prd._Product prd
 		LEFt JOIN prd.Document doc ON prd.ID = doc.Type 
 		LEFt JOIN prd.Flow flw ON flw.DocumentID = doc.ID AND flw.ActionDate IS NULL
-			AND flw.FromState = 1 AND flw.ToState = 1
+			AND flw.ToState IN(1,220)
 		LEFT JOIN org._Position FrPos ON flw.ToPositionID = FrPos.ID
 		LEFT JOIN org._Position ToPos ON flw.ToPositionID = ToPos.ID
 		WHERE doc.RemoveDate IS NULL
@@ -43,6 +45,8 @@ BEGIN
 			prd.ClassificationName,
 			doc.CreatorID, 
 			doc.CreationDate,
+			doc.Expired,
+			flw.ToState,
 			FrPos.ID,
 			FrPos.FirstName,
 			FrPos.LastName,

@@ -14,15 +14,27 @@ namespace Kama.Bonyad.Evaluation.Core.Model
 
         همه_موارد = 20
     }
+    public enum StockActionState : byte
+    {
+        Unknown = 0,
+        موجودی_انبار = 1,
+        هشدار_موجودی = 2,
+        انقضا = 3,
+        هشدار_انقضا = 4,
+    }
 
     public enum DocState : byte
     {
         Unknown = 0,
         انبار = 1,
+        پردازش_سفارش = 5,
+        درحال_ارسال = 10,
+        تحویل_داده_شده = 20,
+        مرجوع = 80,
         فروش_حضوری = 100,
-        انقضا = 240,
-        مرجوع = 241,
-        دورریز = 242
+        انقضا = 220,
+        مرجوع_به_تولید_کننده = 221,
+        دورریز = 222
     }
     public enum OpinionType : byte
     {
@@ -45,7 +57,8 @@ namespace Kama.Bonyad.Evaluation.Core.Model
     {
         Unknown = 0,
         تصویر_دسته_بندی = 1,
-        تصویر_دسته_کالا = 2,
+        تصویر_کالا = 2,
+        تصویر_برند = 3,
     }
 
     public enum UnitOfMeasureType : byte

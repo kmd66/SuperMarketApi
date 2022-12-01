@@ -74,6 +74,11 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
                     _guID: model.GuID
                     )).ToActionResult<Brand>();
 
+                if (result.Data != null)
+                {
+                    var resultAttachment = await _attachmentDataSource.ListAsync(new AttachmentListVM { ParentIDs = new List<Guid> { result.Data.GuID } });
+                    result.Data.Attachment = resultAttachment.Data.FirstOrDefault();
+                }
                 return result;
             }
             catch (Exception e)
@@ -93,6 +98,15 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
                     _pageSize: model.PageSize
                     
                     )).ToListActionResult<Brand>();
+
+                if (result.Data != null && model.IsAttachment)
+                {
+                    var resultAttachment = await _attachmentDataSource.ListAsync(new AttachmentListVM { ParentIDs = result.Data.Select(x => x.GuID).ToList() });
+                    foreach (var brand in result.Data)
+                    {
+                        brand.Attachment = resultAttachment.Data.FirstOrDefault(x => x.ParentID == brand.GuID);
+                    }
+                }
 
                 return result;
             }

@@ -12,6 +12,8 @@ namespace Kama.Bonyad.Evaluation.Core.Service
         Task<AppCore.Result> AddListAsync(List<Stock> model);
         Task<Result<IEnumerable<Stock>>> GetAsync(Stock model);
 
-        Task<Result<IEnumerable<Stock>>> ListAsync(Stock model);
+        Task<Result<IEnumerable<Stock>>> ListAsync(StockVM model);
+
+        Task<Result> ChangeState(StockChengState model);
     }
 }

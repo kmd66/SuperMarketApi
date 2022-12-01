@@ -14,9 +14,6 @@ namespace Kama.Bonyad.Evaluation.Core.Model
         public DateTime Date { get; set; }
         public Guid CreatorID { get; set; }
         public string FromPositionName { get; set; }
-
-        public int? PageSize { get; set; }
-
-        public int? PageIndex { get; set; }
+        public DateTime? Expired { get; set; }
     }
 }

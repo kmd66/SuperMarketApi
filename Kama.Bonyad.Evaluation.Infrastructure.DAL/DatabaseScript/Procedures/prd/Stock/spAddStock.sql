@@ -9,6 +9,7 @@ CREATE PROCEDURE prd.spAddStock
 	@AID BIGINT,
 	@ACreatorID UNIQUEIDENTIFIER,
 	@AGuIDS NVARCHAR(MAX),
+	@AExpired DATETIME,
 	@AIsEXECspIndexCountStock BIT
 WITH ENCRYPTION
 AS
@@ -20,17 +21,16 @@ BEGIN
 		@ID  BIGINT = @AID ,
 		@CreatorID  UNIQUEIDENTIFIER = @ACreatorID ,
 		@GuIDS NVARCHAR(MAX) = TRIM(@AGuIDS),
+		@Expired DATETIME = @AExpired,
 		@IsEXECspIndexCountStock BIT = @AIsEXECspIndexCountStock,
-		@Date DATETIME = GETDATE(),
-		@LastID  BIGINT
+		@Date DATETIME = GETDATE()
 
 	BEGIN TRY
 		BEGIN TRAN
 	
-		SET @LastID =(SELECT MAX(ID) FROM prd.Document)
-		INSERT INTO [prd].[Document](GuID, Type, CreatorID, CreationDate)
+		INSERT INTO [prd].[Document](GuID, Type, CreatorID, CreationDate,Expired)
 		SELECT 
-			VALUE, @ID, @CreatorID, @Date
+			VALUE, @ID, @CreatorID, @Date, @Expired
 		FROM OPENJSON(@GuIDS)
 
 		

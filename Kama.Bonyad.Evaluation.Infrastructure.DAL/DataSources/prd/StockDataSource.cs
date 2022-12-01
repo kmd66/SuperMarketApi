@@ -23,6 +23,7 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
                     _creatorID:_requestInfo.PositionId,
                     _id: model.ID,
                     _guIDS: _objSerializer.Serialize(ids),
+                    _expired:model.Expired,
                     _isEXECspIndexCountStock: true
                     )).ToActionResult<Stock>();
 
@@ -39,7 +40,7 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
             try
             {
                 var commands = new List<SqlCommand>();
-                
+
                 int row = 0;
                 foreach (var item in model)
                 {
@@ -48,7 +49,8 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
                         _creatorID: _requestInfo.PositionId,
                         _id: item.ID,
                         _guIDS: _objSerializer.Serialize(ids),
-                        _isEXECspIndexCountStock: row +1 == model.Count?true:false
+                    _expired: item.Expired,
+                        _isEXECspIndexCountStock: row + 1 == model.Count ? true : false
                         ));
                     row++;
                 }
@@ -79,7 +81,7 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
             }
         }
 
-        public async Task<Result<IEnumerable<Stock>>> ListAsync(Stock model)
+        public async Task<Result<IEnumerable<Stock>>> ListAsync(StockVM model)
         {
             try
             {
@@ -87,6 +89,7 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
                     _id: model.ID,
                     _name:model.Name,
                     _classificationID:model.ClassificationID,
+                    _actionState:(byte)model.ActionState,
                     _pageIndex:model.PageIndex,
                     _pageSize:model.PageSize
                     )).ToListActionResult<Stock>();
@@ -98,5 +101,42 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
             }
         }
 
+        public async Task<Result<IEnumerable<Stock>>> ListMinimumToAlertAsync(StockVM model)
+        {
+            try
+            {
+                var result = (await _dbPRD.GetStocksMinimumToAlertAsync(
+                    _id: model.ID,
+                    _name: model.Name,
+                    _actionState: (byte)model.ActionState,
+                    _classificationID: model.ClassificationID,
+                    _pageIndex: model.PageIndex,
+                    _pageSize: model.PageSize
+                    )).ToListActionResult<Stock>();
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+        public async Task<Result> ChangeState(StockChengState model)
+        {
+            try
+            {
+                var result = (await _dbPRD.StockChangeStateAsync(
+                    _id:model.ID,
+                    _fromPositionID: _requestInfo.PositionId,
+                    _state:(byte)model.State
+                    )).ToActionResult();
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
     }
 }

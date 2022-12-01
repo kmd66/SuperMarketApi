@@ -29,7 +29,11 @@ namespace Kama.Bonyad.Evaluation.API.Controllers
             => _service.GetAsync(model);
 
         [HttpPost, Route("List")]
-        public Task<Result<IEnumerable<Stock>>> List(Stock model)
+        public Task<Result<IEnumerable<Stock>>> List(StockVM model)
             => _service.ListAsync(model);
+
+        [HttpPost, Route("ChangeState")]
+        public Task<Result> ChangeState(StockChengState model)
+            => _service.ChangeState(model);
     }
 }

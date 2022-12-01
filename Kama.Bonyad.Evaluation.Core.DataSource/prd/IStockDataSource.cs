@@ -13,6 +13,10 @@ namespace Kama.Bonyad.Evaluation.Core.DataSource
 
         Task<Result<IEnumerable<Stock>>> GetAsync(Stock model);
 
-        Task<Result<IEnumerable<Stock>>> ListAsync(Stock model);
+        Task<Result<IEnumerable<Stock>>> ListAsync(StockVM model);
+
+        Task<Result<IEnumerable<Stock>>> ListMinimumToAlertAsync(StockVM model);
+
+        Task<Result> ChangeState(StockChengState model);
     }
 }

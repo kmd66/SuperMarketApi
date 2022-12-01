@@ -10,6 +10,7 @@ namespace Kama.Bonyad.Evaluation.Core.Model
     {
         public long ParentID { get; set; }
         public string Name { get; set; }
+        public bool IsAttachment { get; set; }
 
     }
 }

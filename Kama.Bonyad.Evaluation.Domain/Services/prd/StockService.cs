@@ -1,4 +1,5 @@
-﻿using Kama.Bonyad.Evaluation.Core.DataSource;
+﻿using Kama.AppCore;
+using Kama.Bonyad.Evaluation.Core.DataSource;
 using Kama.Bonyad.Evaluation.Core.Model;
 using Kama.Bonyad.Evaluation.Core.Service;
 using System;
@@ -53,11 +54,33 @@ namespace Kama.Bonyad.Evaluation.Domain.Services
             return await _dataSource.AddListAsync(model, guids);
         }
 
+        public Task<Result> ChangeState(StockChengState model)
+        {
+            if (model.ID == 0)
+                return AppCore.Result.FailureAsync(message: "ID null");
+            if (model.State != DocState.مرجوع_به_تولید_کننده && model.State != DocState.دورریز)
+                return AppCore.Result.FailureAsync(message: "State null");
+
+            return _dataSource.ChangeState(model);
+        }
+
         public Task<AppCore.Result<IEnumerable<Stock>>> GetAsync(Stock model)
             => _dataSource.GetAsync(model);
 
-        public Task<AppCore.Result<IEnumerable<Stock>>> ListAsync(Stock model)
-            => _dataSource.ListAsync(model);
+        public Task<AppCore.Result<IEnumerable<Stock>>> ListAsync(StockVM model)
+        {
+            switch (model.ActionState)
+            {
+                case StockActionState.موجودی_انبار:
+                case StockActionState.انقضا:
+                    return _dataSource.ListAsync(model);
+                case StockActionState.هشدار_موجودی:
+                case StockActionState.هشدار_انقضا:
+                    return _dataSource.ListMinimumToAlertAsync(model);
+                default:
+                    return _dataSource.ListAsync(model);
+            }
+        }
 
         private async Task<AppCore.Result<Stock>> _ValidateForSave(Stock model)
         {
@@ -65,6 +88,8 @@ namespace Kama.Bonyad.Evaluation.Domain.Services
                 return AppCore.Result<Stock>.Failure(message: "Count null");
             if (model.ID <= 0)
                 return AppCore.Result<Stock>.Failure(message: "ID null");
+            if (model.Expired == null || model.Expired < DateTime.Now.AddDays(1))
+                return AppCore.Result<Stock>.Failure(message: "Expired null");
 
             return AppCore.Result<Stock>.Successful();
         }

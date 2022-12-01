@@ -91,7 +91,9 @@ namespace Kama.Bonyad.Evaluation.ApiClient.Interface
 
 						 				Task<AppCore.Result<IEnumerable<model.Stock>>> Get(model.Stock model, IDictionary<string, string> httpHeaders = null);
 
-						 				Task<AppCore.Result<IEnumerable<model.Stock>>> List(model.Stock model, IDictionary<string, string> httpHeaders = null);
+						 				Task<AppCore.Result<IEnumerable<model.Stock>>> List(model.StockVM model, IDictionary<string, string> httpHeaders = null);
+
+						 				Task<AppCore.Result> ChangeState(model.StockChengState model, IDictionary<string, string> httpHeaders = null);
 
 					 }
 

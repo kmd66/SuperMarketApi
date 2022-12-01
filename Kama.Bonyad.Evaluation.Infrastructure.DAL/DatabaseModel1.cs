@@ -376,123 +376,6 @@ public ResultSet ModifyProductClassification(bool? _isNewRecord, Guid? _guID, Gu
 
 #endregion
 
-#region GetStock
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetStock(long? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("prd.spGetStock", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetStockAsync(long? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetStock(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetStockDapperAsync<T>(long? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("prd.spGetStock",new {AID=_id} , timeout );
-}
-
-public ResultSet GetStock(long? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetStock(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetStocks
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetStocks(long? _id, string _name, long? _classificationID, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-var cmd = base.CreateCommand("prd.spGetStocks", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-					new Parameter { Name = "@AClassificationID", IsOutput = false, Value = _classificationID == null ? DBNull.Value : (object)_classificationID }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetStocksAsync(long? _id, string _name, long? _classificationID, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetStocks(_id, _name, _classificationID, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetStocksDapperAsync<T>(long? _id, string _name, long? _classificationID, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("prd.spGetStocks",new {AID=_id,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),AClassificationID=_classificationID,APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
-}
-
-public ResultSet GetStocks(long? _id, string _name, long? _classificationID, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetStocks(_id, _name, _classificationID, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region IndexCountStock
-
-public System.Data.SqlClient.SqlCommand GetCommand_IndexCountStock(int? timeout = null)
-{
-var cmd = base.CreateCommand("prd.spIndexCountStock", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> IndexCountStockAsync(int? timeout = null)
-{
-	using(var cmd = GetCommand_IndexCountStock(timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> IndexCountStockDapperAsync<T>(int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("prd.spIndexCountStock",new {} , timeout );
-}
-
-public ResultSet IndexCountStock(int? timeout = null)
-{
-	using(var cmd = GetCommand_IndexCountStock(timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
 #region AddTag
 
 public System.Data.SqlClient.SqlCommand GetCommand_AddTag(long? _productID, string _tag, int? timeout = null)
@@ -609,9 +492,127 @@ public ResultSet GetTags(long? _productID, int? timeout = null)
 
 #endregion
 
+#region IndexCountStock
+
+public System.Data.SqlClient.SqlCommand GetCommand_IndexCountStock(int? timeout = null)
+{
+var cmd = base.CreateCommand("prd.spIndexCountStock", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> IndexCountStockAsync(int? timeout = null)
+{
+	using(var cmd = GetCommand_IndexCountStock(timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> IndexCountStockDapperAsync<T>(int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("prd.spIndexCountStock",new {} , timeout );
+}
+
+public ResultSet IndexCountStock(int? timeout = null)
+{
+	using(var cmd = GetCommand_IndexCountStock(timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetStocks
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetStocks(long? _id, string _name, long? _classificationID, byte? _actionState, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+var cmd = base.CreateCommand("prd.spGetStocks", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
+					new Parameter { Name = "@AClassificationID", IsOutput = false, Value = _classificationID == null ? DBNull.Value : (object)_classificationID }, 
+					new Parameter { Name = "@AActionState", IsOutput = false, Value = _actionState == null ? DBNull.Value : (object)_actionState }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetStocksAsync(long? _id, string _name, long? _classificationID, byte? _actionState, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetStocks(_id, _name, _classificationID, _actionState, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetStocksDapperAsync<T>(long? _id, string _name, long? _classificationID, byte? _actionState, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("prd.spGetStocks",new {AID=_id,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),AClassificationID=_classificationID,AActionState=_actionState,APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
+}
+
+public ResultSet GetStocks(long? _id, string _name, long? _classificationID, byte? _actionState, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetStocks(_id, _name, _classificationID, _actionState, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetStock
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetStock(long? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("prd.spGetStock", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetStockAsync(long? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetStock(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetStockDapperAsync<T>(long? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("prd.spGetStock",new {AID=_id} , timeout );
+}
+
+public ResultSet GetStock(long? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetStock(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
 #region AddStock
 
-public System.Data.SqlClient.SqlCommand GetCommand_AddStock(long? _id, Guid? _creatorID, string _guIDS, bool? _isEXECspIndexCountStock, int? timeout = null)
+public System.Data.SqlClient.SqlCommand GetCommand_AddStock(long? _id, Guid? _creatorID, string _guIDS, DateTime? _expired, bool? _isEXECspIndexCountStock, int? timeout = null)
 {
 var cmd = base.CreateCommand("prd.spAddStock", 
 	System.Data.CommandType.StoredProcedure, 
@@ -619,6 +620,7 @@ var cmd = base.CreateCommand("prd.spAddStock",
 					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
 					new Parameter { Name = "@ACreatorID", IsOutput = false, Value = _creatorID == null ? DBNull.Value : (object)_creatorID }, 
 					new Parameter { Name = "@AGuIDS", IsOutput = false, Value = string.IsNullOrWhiteSpace(_guIDS) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_guIDS) }, 
+					new Parameter { Name = "@AExpired", IsOutput = false, Value = _expired == null ? DBNull.Value : (object)_expired }, 
 					new Parameter { Name = "@AIsEXECspIndexCountStock", IsOutput = false, Value = _isEXECspIndexCountStock == null ? DBNull.Value : (object)_isEXECspIndexCountStock }, 
 	});
 
@@ -627,22 +629,142 @@ var cmd = base.CreateCommand("prd.spAddStock",
 			return cmd;
 }
 
-public async Task<ResultSet> AddStockAsync(long? _id, Guid? _creatorID, string _guIDS, bool? _isEXECspIndexCountStock, int? timeout = null)
+public async Task<ResultSet> AddStockAsync(long? _id, Guid? _creatorID, string _guIDS, DateTime? _expired, bool? _isEXECspIndexCountStock, int? timeout = null)
 {
-	using(var cmd = GetCommand_AddStock(_id, _creatorID, _guIDS, _isEXECspIndexCountStock, timeout))
+	using(var cmd = GetCommand_AddStock(_id, _creatorID, _guIDS, _expired, _isEXECspIndexCountStock, timeout))
 {
 	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
 }
 }
 
-public async Task<AppCore.Result<IEnumerable<T>>> AddStockDapperAsync<T>(long? _id, Guid? _creatorID, string _guIDS, bool? _isEXECspIndexCountStock, int? timeout = null)
+public async Task<AppCore.Result<IEnumerable<T>>> AddStockDapperAsync<T>(long? _id, Guid? _creatorID, string _guIDS, DateTime? _expired, bool? _isEXECspIndexCountStock, int? timeout = null)
 {
-	return await  DapperQueryAsync<T>("prd.spAddStock",new {AID=_id,ACreatorID=_creatorID,AGuIDS=string.IsNullOrWhiteSpace(_guIDS) ? _guIDS : ReplaceArabicWithPersianChars(_guIDS),AIsEXECspIndexCountStock=_isEXECspIndexCountStock} , timeout );
+	return await  DapperQueryAsync<T>("prd.spAddStock",new {AID=_id,ACreatorID=_creatorID,AGuIDS=string.IsNullOrWhiteSpace(_guIDS) ? _guIDS : ReplaceArabicWithPersianChars(_guIDS),AExpired=_expired,AIsEXECspIndexCountStock=_isEXECspIndexCountStock} , timeout );
 }
 
-public ResultSet AddStock(long? _id, Guid? _creatorID, string _guIDS, bool? _isEXECspIndexCountStock, int? timeout = null)
+public ResultSet AddStock(long? _id, Guid? _creatorID, string _guIDS, DateTime? _expired, bool? _isEXECspIndexCountStock, int? timeout = null)
 {
-	using(var cmd = GetCommand_AddStock(_id, _creatorID, _guIDS, _isEXECspIndexCountStock, timeout))
+	using(var cmd = GetCommand_AddStock(_id, _creatorID, _guIDS, _expired, _isEXECspIndexCountStock, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetStocksMinimumToAlert
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetStocksMinimumToAlert(long? _id, string _name, long? _classificationID, byte? _actionState, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+var cmd = base.CreateCommand("prd.spGetStocksMinimumToAlert", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
+					new Parameter { Name = "@AClassificationID", IsOutput = false, Value = _classificationID == null ? DBNull.Value : (object)_classificationID }, 
+					new Parameter { Name = "@AActionState", IsOutput = false, Value = _actionState == null ? DBNull.Value : (object)_actionState }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetStocksMinimumToAlertAsync(long? _id, string _name, long? _classificationID, byte? _actionState, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetStocksMinimumToAlert(_id, _name, _classificationID, _actionState, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetStocksMinimumToAlertDapperAsync<T>(long? _id, string _name, long? _classificationID, byte? _actionState, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("prd.spGetStocksMinimumToAlert",new {AID=_id,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),AClassificationID=_classificationID,AActionState=_actionState,APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
+}
+
+public ResultSet GetStocksMinimumToAlert(long? _id, string _name, long? _classificationID, byte? _actionState, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetStocksMinimumToAlert(_id, _name, _classificationID, _actionState, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region ReturnExpiredState
+
+public System.Data.SqlClient.SqlCommand GetCommand_ReturnExpiredState(int? timeout = null)
+{
+var cmd = base.CreateCommand("prd.spReturnExpiredState", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> ReturnExpiredStateAsync(int? timeout = null)
+{
+	using(var cmd = GetCommand_ReturnExpiredState(timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> ReturnExpiredStateDapperAsync<T>(int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("prd.spReturnExpiredState",new {} , timeout );
+}
+
+public ResultSet ReturnExpiredState(int? timeout = null)
+{
+	using(var cmd = GetCommand_ReturnExpiredState(timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region StockChangeState
+
+public System.Data.SqlClient.SqlCommand GetCommand_StockChangeState(long? _id, Guid? _fromPositionID, byte? _state, int? timeout = null)
+{
+var cmd = base.CreateCommand("prd.spStockChangeState", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@AFromPositionID", IsOutput = false, Value = _fromPositionID == null ? DBNull.Value : (object)_fromPositionID }, 
+					new Parameter { Name = "@AState", IsOutput = false, Value = _state == null ? DBNull.Value : (object)_state }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> StockChangeStateAsync(long? _id, Guid? _fromPositionID, byte? _state, int? timeout = null)
+{
+	using(var cmd = GetCommand_StockChangeState(_id, _fromPositionID, _state, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> StockChangeStateDapperAsync<T>(long? _id, Guid? _fromPositionID, byte? _state, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("prd.spStockChangeState",new {AID=_id,AFromPositionID=_fromPositionID,AState=_state} , timeout );
+}
+
+public ResultSet StockChangeState(long? _id, Guid? _fromPositionID, byte? _state, int? timeout = null)
+{
+	using(var cmd = GetCommand_StockChangeState(_id, _fromPositionID, _state, timeout))
 {
 	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
 }
