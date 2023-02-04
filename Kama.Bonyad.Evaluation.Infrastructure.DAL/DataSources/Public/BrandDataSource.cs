@@ -25,8 +25,8 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
                 var result = (await _dbPBL.ModifyBrandAsync(
                     _isNewRecord: isNewRecord,
                     _guID:model.GuID,
-                    _name:model.Name,
-                    _parentID:model.ParentID,
+                    _faName: model.FaName,
+                    _enName: model.EnName,
                     _id:model.ID
                     )).ToActionResult<Core.Model.Brand>();
 
@@ -92,8 +92,8 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
             try
             {
                 var result = (await _dbPBL.GetBrandsAsync(
-                    _parentID: model.ParentID,
-                    _name:model.Name,
+                    _faName:model.FaName,
+                    _enName:model.EnName,
                     _pageIndex:model.PageIndex,
                     _pageSize: model.PageSize
                     

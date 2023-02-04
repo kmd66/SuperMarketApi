@@ -20,10 +20,7 @@ BEGIN
 	
 	SELECT 
 		brand.*
-		, parent.Name ParentName
 	FROM pbl.Brand brand
-	INNER JOIN [prd].[ProductClassification] parent
-		ON brand.ParentID = parent.ID
 	WHERE (@ID <> 0 AND brand.[ID] = @ID)
 		OR (@GuID IS NOT NULL AND brand.[GuID] = @GuID)
 

@@ -6,8 +6,8 @@ IF EXISTS(SELECT 1 FROM sys.procedures WHERE [object_id] = OBJECT_ID('pbl.spGetB
 GO
 
 CREATE PROCEDURE pbl.spGetBrands
-	@AParentID BIGINT,
-	@AName NVARCHAR(MAX),
+	@AFaName NVARCHAR(MAX),
+	@AEnName NVARCHAR(MAX),
 	@APageSize INT,
 	@APageIndex INT
 WITH ENCRYPTION
@@ -17,8 +17,8 @@ BEGIN
 	SET XACT_ABORT ON;
 	
 	DECLARE 
-		@ParentID BIGINT = @AParentID,
-		@Name NVARCHAR(MAX) = TRIM(@AName),
+		@FaName NVARCHAR(MAX) = TRIM(@AFaName),
+		@EnName NVARCHAR(MAX) = TRIM(@AEnName),
 		@PageSize INT = COALESCE(@APageSize, 0),
 		@PageIndex INT = COALESCE(@APageIndex, 0)
 	
@@ -29,13 +29,11 @@ BEGIN
 	END
 	
 	SELECT
-		Count(brand.ID) OVER() Total, brand.*
-		, parent.Name ParentName
+		Count(brand.ID) OVER() Total,
+		brand.*
 	FROM pbl.Brand brand
-	INNER JOIN [prd].[ProductClassification] parent
-		ON brand.ParentID = parent.ID
-	WHERE (@ParentID = 0 OR brand.ParentID = @ParentID)
-		AND(@Name IS NULL OR brand.[Name] LIKE '%' + @Name + '%')
+	WHERE (@FaName IS NULL OR brand.FaName LIKE '%' + @FaName + '%')
+		AND (@EnName IS NULL OR brand.ENName LIKE '%' + @EnName + '%')
 	ORDER BY ID DESC
 	OFFSET ((@PageIndex - 1) * @PageSize) ROWS FETCH NEXT @PageSize ROWS ONLY
 

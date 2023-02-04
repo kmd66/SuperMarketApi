@@ -854,46 +854,6 @@ public ResultSet AddInformation(string _text, int? timeout = null)
 
 #endregion
 
-#region GetInformations
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetInformations(string _text, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-var cmd = base.CreateCommand("prd.spGetInformations", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AText", IsOutput = false, Value = string.IsNullOrWhiteSpace(_text) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_text) }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetInformationsAsync(string _text, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetInformations(_text, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetInformationsDapperAsync<T>(string _text, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("prd.spGetInformations",new {AText=string.IsNullOrWhiteSpace(_text) ? _text : ReplaceArabicWithPersianChars(_text),APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
-}
-
-public ResultSet GetInformations(string _text, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetInformations(_text, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
 #region GetProductClassifications
 
 public System.Data.SqlClient.SqlCommand GetCommand_GetProductClassifications(Guid? _parentID, string _name, string _comment, bool? _allChild, bool? _firstNode, bool? _lastNode, int? _pageSize, int? _pageIndex, int? timeout = null)
@@ -939,6 +899,46 @@ public ResultSet GetProductClassifications(Guid? _parentID, string _name, string
 
 #endregion
 
+#region GetInformations
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetInformations(string _text, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+var cmd = base.CreateCommand("prd.spGetInformations", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AText", IsOutput = false, Value = string.IsNullOrWhiteSpace(_text) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_text) }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetInformationsAsync(string _text, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetInformations(_text, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetInformationsDapperAsync<T>(string _text, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("prd.spGetInformations",new {AText=string.IsNullOrWhiteSpace(_text) ? _text : ReplaceArabicWithPersianChars(_text),APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
+}
+
+public ResultSet GetInformations(string _text, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetInformations(_text, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
 }
 
 class PBL: Database
@@ -949,47 +949,6 @@ public PBL(string connectionString)
 
 public PBL(string connectionString, IModelValueBinder modelValueBinder)
 	:base(connectionString, modelValueBinder){}
-#endregion
-
-#region GetBrands
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetBrands(long? _parentID, string _name, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-var cmd = base.CreateCommand("pbl.spGetBrands", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetBrandsAsync(long? _parentID, string _name, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetBrands(_parentID, _name, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetBrandsDapperAsync<T>(long? _parentID, string _name, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("pbl.spGetBrands",new {AParentID=_parentID,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
-}
-
-public ResultSet GetBrands(long? _parentID, string _name, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetBrands(_parentID, _name, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
 #endregion
 
 #region DeleteAttachment
@@ -1230,6 +1189,45 @@ public ResultSet GetFlows(int? _documentID, int? timeout = null)
 
 #endregion
 
+#region GetBrand
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetBrand(long? _id, Guid? _guID, int? timeout = null)
+{
+var cmd = base.CreateCommand("pbl.spGetBrand", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@AGuID", IsOutput = false, Value = _guID == null ? DBNull.Value : (object)_guID }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetBrandAsync(long? _id, Guid? _guID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetBrand(_id, _guID, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetBrandDapperAsync<T>(long? _id, Guid? _guID, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("pbl.spGetBrand",new {AID=_id,AGuID=_guID} , timeout );
+}
+
+public ResultSet GetBrand(long? _id, Guid? _guID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetBrand(_id, _guID, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
 #region DeleteBrand
 
 public System.Data.SqlClient.SqlCommand GetCommand_DeleteBrand(long? _id, int? timeout = null)
@@ -1268,18 +1266,17 @@ public ResultSet DeleteBrand(long? _id, int? timeout = null)
 
 #endregion
 
-#region ModifyBrand
+#region GetBrands
 
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyBrand(bool? _isNewRecord, long? _id, Guid? _guID, long? _parentID, string _name, int? timeout = null)
+public System.Data.SqlClient.SqlCommand GetCommand_GetBrands(string _faName, string _enName, int? _pageSize, int? _pageIndex, int? timeout = null)
 {
-var cmd = base.CreateCommand("pbl.spModifyBrand", 
+var cmd = base.CreateCommand("pbl.spGetBrands", 
 	System.Data.CommandType.StoredProcedure, 
 	new Parameter[]{
-					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@AGuID", IsOutput = false, Value = _guID == null ? DBNull.Value : (object)_guID }, 
-					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
+					new Parameter { Name = "@AFaName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_faName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_faName) }, 
+					new Parameter { Name = "@AEnName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_enName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_enName) }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
 	});
 
 			if (timeout != null)
@@ -1287,22 +1284,22 @@ var cmd = base.CreateCommand("pbl.spModifyBrand",
 			return cmd;
 }
 
-public async Task<ResultSet> ModifyBrandAsync(bool? _isNewRecord, long? _id, Guid? _guID, long? _parentID, string _name, int? timeout = null)
+public async Task<ResultSet> GetBrandsAsync(string _faName, string _enName, int? _pageSize, int? _pageIndex, int? timeout = null)
 {
-	using(var cmd = GetCommand_ModifyBrand(_isNewRecord, _id, _guID, _parentID, _name, timeout))
+	using(var cmd = GetCommand_GetBrands(_faName, _enName, _pageSize, _pageIndex, timeout))
 {
 	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
 }
 }
 
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyBrandDapperAsync<T>(bool? _isNewRecord, long? _id, Guid? _guID, long? _parentID, string _name, int? timeout = null)
+public async Task<AppCore.Result<IEnumerable<T>>> GetBrandsDapperAsync<T>(string _faName, string _enName, int? _pageSize, int? _pageIndex, int? timeout = null)
 {
-	return await  DapperQueryAsync<T>("pbl.spModifyBrand",new {AIsNewRecord=_isNewRecord,AID=_id,AGuID=_guID,AParentID=_parentID,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name)} , timeout );
+	return await  DapperQueryAsync<T>("pbl.spGetBrands",new {AFaName=string.IsNullOrWhiteSpace(_faName) ? _faName : ReplaceArabicWithPersianChars(_faName),AEnName=string.IsNullOrWhiteSpace(_enName) ? _enName : ReplaceArabicWithPersianChars(_enName),APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
 }
 
-public ResultSet ModifyBrand(bool? _isNewRecord, long? _id, Guid? _guID, long? _parentID, string _name, int? timeout = null)
+public ResultSet GetBrands(string _faName, string _enName, int? _pageSize, int? _pageIndex, int? timeout = null)
 {
-	using(var cmd = GetCommand_ModifyBrand(_isNewRecord, _id, _guID, _parentID, _name, timeout))
+	using(var cmd = GetCommand_GetBrands(_faName, _enName, _pageSize, _pageIndex, timeout))
 {
 	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
 }
@@ -1310,15 +1307,18 @@ public ResultSet ModifyBrand(bool? _isNewRecord, long? _id, Guid? _guID, long? _
 
 #endregion
 
-#region GetBrand
+#region ModifyBrand
 
-public System.Data.SqlClient.SqlCommand GetCommand_GetBrand(long? _id, Guid? _guID, int? timeout = null)
+public System.Data.SqlClient.SqlCommand GetCommand_ModifyBrand(bool? _isNewRecord, long? _id, Guid? _guID, string _faName, string _enName, int? timeout = null)
 {
-var cmd = base.CreateCommand("pbl.spGetBrand", 
+var cmd = base.CreateCommand("pbl.spModifyBrand", 
 	System.Data.CommandType.StoredProcedure, 
 	new Parameter[]{
+					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
 					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
 					new Parameter { Name = "@AGuID", IsOutput = false, Value = _guID == null ? DBNull.Value : (object)_guID }, 
+					new Parameter { Name = "@AFaName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_faName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_faName) }, 
+					new Parameter { Name = "@AEnName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_enName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_enName) }, 
 	});
 
 			if (timeout != null)
@@ -1326,22 +1326,22 @@ var cmd = base.CreateCommand("pbl.spGetBrand",
 			return cmd;
 }
 
-public async Task<ResultSet> GetBrandAsync(long? _id, Guid? _guID, int? timeout = null)
+public async Task<ResultSet> ModifyBrandAsync(bool? _isNewRecord, long? _id, Guid? _guID, string _faName, string _enName, int? timeout = null)
 {
-	using(var cmd = GetCommand_GetBrand(_id, _guID, timeout))
+	using(var cmd = GetCommand_ModifyBrand(_isNewRecord, _id, _guID, _faName, _enName, timeout))
 {
 	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
 }
 }
 
-public async Task<AppCore.Result<IEnumerable<T>>> GetBrandDapperAsync<T>(long? _id, Guid? _guID, int? timeout = null)
+public async Task<AppCore.Result<IEnumerable<T>>> ModifyBrandDapperAsync<T>(bool? _isNewRecord, long? _id, Guid? _guID, string _faName, string _enName, int? timeout = null)
 {
-	return await  DapperQueryAsync<T>("pbl.spGetBrand",new {AID=_id,AGuID=_guID} , timeout );
+	return await  DapperQueryAsync<T>("pbl.spModifyBrand",new {AIsNewRecord=_isNewRecord,AID=_id,AGuID=_guID,AFaName=string.IsNullOrWhiteSpace(_faName) ? _faName : ReplaceArabicWithPersianChars(_faName),AEnName=string.IsNullOrWhiteSpace(_enName) ? _enName : ReplaceArabicWithPersianChars(_enName)} , timeout );
 }
 
-public ResultSet GetBrand(long? _id, Guid? _guID, int? timeout = null)
+public ResultSet ModifyBrand(bool? _isNewRecord, long? _id, Guid? _guID, string _faName, string _enName, int? timeout = null)
 {
-	using(var cmd = GetCommand_GetBrand(_id, _guID, timeout))
+	using(var cmd = GetCommand_ModifyBrand(_isNewRecord, _id, _guID, _faName, _enName, timeout))
 {
 	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
 }

@@ -8,9 +8,8 @@ namespace Kama.Bonyad.Evaluation.Core.Model
 {
     public class Brand : Model
     {
-        public long ParentID { get; set; }
-        public string ParentName { get; set; }
-        public string Name { get; set; }
+        public string FaName { get; set; }
+        public string EnName { get; set; }
         public Attachment Attachment { get; set; }
 
     }

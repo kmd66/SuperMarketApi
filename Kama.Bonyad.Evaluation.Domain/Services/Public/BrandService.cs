@@ -43,11 +43,11 @@ namespace Kama.Bonyad.Evaluation.Domain.Services
 
         private async Task<AppCore.Result<Brand>> _ValidateForSave(Brand model,bool addState)
         {
-            if (string.IsNullOrEmpty(model.Name))
+            if (string.IsNullOrEmpty(model.FaName))
                 return AppCore.Result<Brand>.Failure(message: "نام وارد نشده است");
 
-            if (model.ParentID == 0 && addState)
-                return AppCore.Result<Brand>.Failure(message: "والد وارد نشده است");
+            if (string.IsNullOrEmpty(model.EnName))
+                return AppCore.Result<Brand>.Failure(message: "نام انگلیسی وارد نشده است");
             
                 return AppCore.Result<Brand>.Successful();
         }

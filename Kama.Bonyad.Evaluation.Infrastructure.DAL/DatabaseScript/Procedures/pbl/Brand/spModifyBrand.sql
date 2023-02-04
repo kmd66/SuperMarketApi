@@ -9,8 +9,8 @@ CREATE PROCEDURE pbl.spModifyBrand
 	@AIsNewRecord BIT,
 	@AID BIGINT,
 	@AGuID UNIQUEIDENTIFIER,
-	@AParentID BIGINT,
-	@AName NVARCHAR(MAX)
+	@AFaName NVARCHAR(MAX),
+	@AEnName NVARCHAR(MAX)
 WITH ENCRYPTION
 AS
 BEGIN
@@ -21,8 +21,8 @@ BEGIN
 		@IsNewRecord BIT = ISNULL(@AIsNewRecord, 0),
 		@ID  BIGINT = @AID ,
 		@GuID  UNIQUEIDENTIFIER = @AGuID ,
-		@ParentID BIGINT = @AParentID,
-		@Name NVARCHAR(MAX) = TRIM(@AName)
+		@FaName NVARCHAR(MAX) = TRIM(@AFaName),
+		@EnName NVARCHAR(MAX) = TRIM(@AEnName)
 
 	BEGIN TRY
 		BEGIN TRAN
@@ -30,14 +30,14 @@ BEGIN
 		IF @IsNewRecord = 1 -- insert
 		BEGIN
 			INSERT INTO pbl.Brand
-				([GuID], ParentID, [Name])
+				([GuID], FaName, EnName)
 			VALUES
-				(@AGuID, @ParentID, @Name)
+				(@AGuID, @FaName, @EnName)
 		END
 		ELSE
 		BEGIN -- update
 			UPDATE pbl.Brand
-			SET [Name] = @Name
+			SET FaName = @FaName,  EnName = @EnName
 			WHERE ID = @ID
 
 		END
