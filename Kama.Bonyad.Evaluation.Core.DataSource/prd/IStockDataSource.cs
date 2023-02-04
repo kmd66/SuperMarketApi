@@ -18,5 +18,7 @@ namespace Kama.Bonyad.Evaluation.Core.DataSource
         Task<Result<IEnumerable<Stock>>> ListMinimumToAlertAsync(StockVM model);
 
         Task<Result> ChangeState(StockChengState model);
+
+        Task<Result> SaleInPerson(List<Stock> model);
     }
 }

@@ -78,6 +78,7 @@
     <Content Include="DatabaseScript\Procedures\prd\Document\spGetDocuments.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Document\spModifyDocument.sql" />
     <Content Include="DatabaseScript\Procedures\prd\spReturnExpiredState.sql" />
+    <Content Include="DatabaseScript\Procedures\prd\Stock\spSaleInPerson.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Stock\spStockChangeState.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Stock\spGetStocksToAlert.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Stock\spIndexCountStock.sql" />

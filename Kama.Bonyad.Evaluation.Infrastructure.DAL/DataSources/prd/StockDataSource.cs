@@ -39,6 +39,7 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
         {
             try
             {
+                var t = _objSerializer.Serialize(model);
                 var commands = new List<SqlCommand>();
 
                 int row = 0;
@@ -137,6 +138,12 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
             {
                 throw;
             }
+        }
+
+        public Task<Result> SaleInPerson(List<Stock> model)
+        {
+            var t = _objSerializer.Serialize(model);
+            throw new NotImplementedException();
         }
     }
 }

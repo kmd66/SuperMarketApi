@@ -35,5 +35,9 @@ namespace Kama.Bonyad.Evaluation.API.Controllers
         [HttpPost, Route("ChangeState")]
         public Task<Result> ChangeState(StockChengState model)
             => _service.ChangeState(model);
+
+        [HttpPost, Route("ChangeState")]
+        public Task<Result> SaleInPerson(List<Stock> model)
+            => _service.SaleInPerson(model);
     }
 }

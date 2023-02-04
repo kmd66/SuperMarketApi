@@ -15,5 +15,7 @@ namespace Kama.Bonyad.Evaluation.Core.Service
         Task<Result<IEnumerable<Stock>>> ListAsync(StockVM model);
 
         Task<Result> ChangeState(StockChengState model);
+
+        Task<Result> SaleInPerson(List<Stock> model);
     }
 }

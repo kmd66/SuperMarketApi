@@ -16,6 +16,8 @@ namespace Kama.Bonyad.Evaluation.Domain.Services
         {
         }
 
+        private static int _maxCount = 50;
+
         public async Task<AppCore.Result<Stock>> AddAsync(Stock model)
         {
             var validation = await _ValidateForSave(model);
@@ -31,7 +33,7 @@ namespace Kama.Bonyad.Evaluation.Domain.Services
 
         public async Task<AppCore.Result> AddListAsync(List<Stock> model)
         {
-            if(model.Count == 0 || model.Count > 20)
+            if(model.Count == 0 || model.Count > _maxCount)
                 return AppCore.Result<Stock>.Failure(message: "modelCount null");
 
             foreach (var item in model)
@@ -82,11 +84,25 @@ namespace Kama.Bonyad.Evaluation.Domain.Services
             }
         }
 
+
+        public async Task<Result> SaleInPerson(List<Stock> model)
+        {
+            if (model.Count == 0 || model.Count > _maxCount)
+                return AppCore.Result<Stock>.Failure(message: "modelCount null");
+
+            foreach (var item in model)
+            {
+                if (item.Count < 1)
+                    return AppCore.Result<Stock>.Failure(message: "Count null");
+            }
+
+            return await _dataSource.SaleInPerson(model);
+        }
         private async Task<AppCore.Result<Stock>> _ValidateForSave(Stock model)
         {
-            if (model.Count <= 0)
+            if (model.Count < 1)
                 return AppCore.Result<Stock>.Failure(message: "Count null");
-            if (model.ID <= 0)
+            if (model.ID < 1)
                 return AppCore.Result<Stock>.Failure(message: "ID null");
             if (model.Expired == null || model.Expired < DateTime.Now.AddDays(1))
                 return AppCore.Result<Stock>.Failure(message: "Expired null");
