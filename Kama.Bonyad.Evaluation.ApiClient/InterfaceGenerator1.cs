@@ -83,6 +83,14 @@ namespace Kama.Bonyad.Evaluation.ApiClient.Interface
 
 					 }
 
+  		 public interface IInformationService: IService
+		 {
+						 				Task<AppCore.Result<model.Information>> Add(model.Information model, IDictionary<string, string> httpHeaders = null);
+
+						 				Task<AppCore.Result<IEnumerable<model.Information>>> List(model.InformationVM model, IDictionary<string, string> httpHeaders = null);
+
+					 }
+
   		 public interface IStockService: IService
 		 {
 						 				Task<AppCore.Result<model.Stock>> Add(model.Stock model, IDictionary<string, string> httpHeaders = null);
@@ -94,6 +102,8 @@ namespace Kama.Bonyad.Evaluation.ApiClient.Interface
 						 				Task<AppCore.Result<IEnumerable<model.Stock>>> List(model.StockVM model, IDictionary<string, string> httpHeaders = null);
 
 						 				Task<AppCore.Result> ChangeState(model.StockChengState model, IDictionary<string, string> httpHeaders = null);
+
+						 				Task<AppCore.Result> SaleInPerson(List<model.Stock> model, IDictionary<string, string> httpHeaders = null);
 
 					 }
 

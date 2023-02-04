@@ -52,6 +52,7 @@
     <Compile Include="IDataSource.cs" />
     <Compile Include="IMessageDataSource.cs" />
     <Compile Include="prd\IProductDataSource.cs" />
+    <Compile Include="prd\IInformationDataSource.cs" />
     <Compile Include="prd\IStockDataSource.cs" />
     <Compile Include="prd\ITagDataSource.cs" />
     <Compile Include="prd\IProductClassificationDataSource.cs" />

@@ -816,6 +816,84 @@ public ResultSet GetProducts(long? _parentID, string _name, string _comment, lon
 
 #endregion
 
+#region AddInformation
+
+public System.Data.SqlClient.SqlCommand GetCommand_AddInformation(string _text, int? timeout = null)
+{
+var cmd = base.CreateCommand("prd.spAddInformation", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AText", IsOutput = false, Value = string.IsNullOrWhiteSpace(_text) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_text) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> AddInformationAsync(string _text, int? timeout = null)
+{
+	using(var cmd = GetCommand_AddInformation(_text, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> AddInformationDapperAsync<T>(string _text, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("prd.spAddInformation",new {AText=string.IsNullOrWhiteSpace(_text) ? _text : ReplaceArabicWithPersianChars(_text)} , timeout );
+}
+
+public ResultSet AddInformation(string _text, int? timeout = null)
+{
+	using(var cmd = GetCommand_AddInformation(_text, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetInformations
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetInformations(string _text, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+var cmd = base.CreateCommand("prd.spGetInformations", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AText", IsOutput = false, Value = string.IsNullOrWhiteSpace(_text) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_text) }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetInformationsAsync(string _text, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetInformations(_text, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetInformationsDapperAsync<T>(string _text, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("prd.spGetInformations",new {AText=string.IsNullOrWhiteSpace(_text) ? _text : ReplaceArabicWithPersianChars(_text),APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
+}
+
+public ResultSet GetInformations(string _text, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetInformations(_text, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
 #region GetProductClassifications
 
 public System.Data.SqlClient.SqlCommand GetCommand_GetProductClassifications(Guid? _parentID, string _name, string _comment, bool? _allChild, bool? _firstNode, bool? _lastNode, int? _pageSize, int? _pageIndex, int? timeout = null)

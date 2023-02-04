@@ -79,6 +79,8 @@
     <Compile Include="prd\Product\ProductVM.cs" />
     <Compile Include="prd\ProductClassification\ProductClassification.cs" />
     <Compile Include="prd\ProductClassification\ProductClassificationVM.cs" />
+    <Compile Include="prd\Information\Information.cs" />
+    <Compile Include="prd\Information\InformationVM.cs" />
     <Compile Include="prd\Stock\StockChengState.cs" />
     <Compile Include="prd\Stock\StockVM.cs" />
     <Compile Include="prd\Stock\Stock.cs" />

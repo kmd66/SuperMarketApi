@@ -200,6 +200,30 @@ namespace Kama.Bonyad.Evaluation.ApiClient
 
             		 }
   
+		 partial class InformationService: Service, IInformationService
+		 {
+			public InformationService(IEvaluationClient client)
+			{
+				_client = client;
+			}
+			readonly IEvaluationClient _client;
+
+			            public virtual Task<AppCore.Result<Kama.Bonyad.Evaluation.Core.Model.Information>> Add( Kama.Bonyad.Evaluation.Core.Model.Information model, IDictionary<string, string> httpHeaders = null)
+			{
+						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
+			const string url = "api/v1/Information/Add";
+							return _client.SendAsync<Kama.Bonyad.Evaluation.Core.Model.Information>(true, url, routeParamValues, httpHeaders, model);
+						}
+
+                        public virtual Task<AppCore.Result<IEnumerable<Kama.Bonyad.Evaluation.Core.Model.Information>>> List( Kama.Bonyad.Evaluation.Core.Model.InformationVM model, IDictionary<string, string> httpHeaders = null)
+			{
+						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
+			const string url = "api/v1/Information/List";
+							return _client.SendAsync<IEnumerable<Kama.Bonyad.Evaluation.Core.Model.Information>>(true, url, routeParamValues, httpHeaders, model);
+						}
+
+            		 }
+  
 		 partial class StockService: Service, IStockService
 		 {
 			public StockService(IEvaluationClient client)
@@ -237,6 +261,13 @@ namespace Kama.Bonyad.Evaluation.ApiClient
 						}
 
                         public virtual Task<AppCore.Result> ChangeState( Kama.Bonyad.Evaluation.Core.Model.StockChengState model, IDictionary<string, string> httpHeaders = null)
+			{
+						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
+			const string url = "api/v1/Stock/ChangeState";
+							return _client.SendAsync(true, url, routeParamValues, httpHeaders, model);
+						}
+
+                        public virtual Task<AppCore.Result> SaleInPerson( List<Kama.Bonyad.Evaluation.Core.Model.Stock> model, IDictionary<string, string> httpHeaders = null)
 			{
 						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
 			const string url = "api/v1/Stock/ChangeState";

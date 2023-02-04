@@ -50,6 +50,7 @@
     <Compile Include="Organization\IDepartmentService.cs" />
     <Compile Include="Organization\IPositionService.cs" />
     <Compile Include="IService.cs" />
+    <Compile Include="prd\IInformationService.cs" />
     <Compile Include="prd\IStockService.cs" />
     <Compile Include="prd\IProductService.cs" />
     <Compile Include="prd\ITagService.cs" />
