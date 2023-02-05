@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="IDataSource.cs" />
     <Compile Include="IMessageDataSource.cs" />
+    <Compile Include="prd\IClassificationDataSource.cs" />
     <Compile Include="prd\IProductDataSource.cs" />
     <Compile Include="prd\IInformationDataSource.cs" />
     <Compile Include="prd\IStockDataSource.cs" />
