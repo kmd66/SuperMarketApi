@@ -30,6 +30,24 @@ namespace Kama.Bonyad.Evaluation.Domain.Services
         public Task<Result<IEnumerable<Information>>> ListAsync(InformationVM model)
             => _dataSource.ListAsync(model);
 
+        public async Task<Result<Information>> AddClassificationInformationAsync(Information model)
+        {
+            if (model.InformationID == 0)
+                return AppCore.Result<Information>.Failure(message: "InformationID null");
+            if (model.ClassificationID == 0)
+                return AppCore.Result<Information>.Failure(message: "ClassificationID null");
+
+            return await _dataSource.AddClassificationInformationAsync(model);
+        }
+
+        public async Task<Result<IEnumerable<Information>>> ListClassificationInformationAsync(InformationVM model)
+        {
+            if (model.ClassificationID == 0)
+                return AppCore.Result<IEnumerable<Information>>.Failure(message: "ClassificationID null");
+
+            return await _dataSource.ListClassificationInformationAsync(model);
+        }
+
         private async Task<AppCore.Result<Information>> _ValidateForSave(Information model)
         {
             if (string.IsNullOrEmpty(model.Text))
@@ -38,5 +56,14 @@ namespace Kama.Bonyad.Evaluation.Domain.Services
             return AppCore.Result<Information>.Successful();
         }
 
+        public async Task<Result> DeleteClassificationInformationAsync(Information model)
+        {
+            if (model.InformationID == 0)
+                return AppCore.Result.Failure(message: "InformationID null");
+            if (model.ClassificationID == 0)
+                return AppCore.Result.Failure(message: "ClassificationID null");
+
+            return await _dataSource.DeleteClassificationInformationAsync(model);
+        }
     }
 }

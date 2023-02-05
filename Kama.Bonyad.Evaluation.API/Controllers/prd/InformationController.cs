@@ -24,5 +24,17 @@ namespace Kama.Bonyad.Evaluation.API.Controllers
         public Task<Result<IEnumerable<Information>>> List(InformationVM model)
             => _service.ListAsync(model);
 
+        [HttpPost, Route("AddClassificationInformation")]
+        public Task<Result<Information>> AddClassificationInformation(Information model)
+            => _service.AddClassificationInformationAsync(model);
+
+        [HttpPost, Route("ListClassificationInformation")]
+        public Task<Result<IEnumerable<Information>>> ListClassificationInformation(InformationVM model)
+            => _service.ListClassificationInformationAsync(model);
+
+        [HttpPost, Route("DeleteClassificationInformation")]
+        public Task<Result> DeleteClassificationInformation(Information model)
+            => _service.DeleteClassificationInformationAsync(model);
+
     }
 }

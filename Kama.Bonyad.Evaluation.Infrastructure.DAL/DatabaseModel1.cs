@@ -854,91 +854,6 @@ public ResultSet AddInformation(string _text, int? timeout = null)
 
 #endregion
 
-#region GetProductClassifications
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetProductClassifications(Guid? _parentID, string _name, string _comment, bool? _allChild, bool? _firstNode, bool? _lastNode, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-var cmd = base.CreateCommand("prd.spGetProductClassifications", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-					new Parameter { Name = "@AComment", IsOutput = false, Value = string.IsNullOrWhiteSpace(_comment) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_comment) }, 
-					new Parameter { Name = "@AAllChild", IsOutput = false, Value = _allChild == null ? DBNull.Value : (object)_allChild }, 
-					new Parameter { Name = "@AFirstNode", IsOutput = false, Value = _firstNode == null ? DBNull.Value : (object)_firstNode }, 
-					new Parameter { Name = "@ALastNode", IsOutput = false, Value = _lastNode == null ? DBNull.Value : (object)_lastNode }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetProductClassificationsAsync(Guid? _parentID, string _name, string _comment, bool? _allChild, bool? _firstNode, bool? _lastNode, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetProductClassifications(_parentID, _name, _comment, _allChild, _firstNode, _lastNode, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetProductClassificationsDapperAsync<T>(Guid? _parentID, string _name, string _comment, bool? _allChild, bool? _firstNode, bool? _lastNode, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("prd.spGetProductClassifications",new {AParentID=_parentID,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),AComment=string.IsNullOrWhiteSpace(_comment) ? _comment : ReplaceArabicWithPersianChars(_comment),AAllChild=_allChild,AFirstNode=_firstNode,ALastNode=_lastNode,APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
-}
-
-public ResultSet GetProductClassifications(Guid? _parentID, string _name, string _comment, bool? _allChild, bool? _firstNode, bool? _lastNode, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetProductClassifications(_parentID, _name, _comment, _allChild, _firstNode, _lastNode, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetInformations
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetInformations(string _text, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-var cmd = base.CreateCommand("prd.spGetInformations", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AText", IsOutput = false, Value = string.IsNullOrWhiteSpace(_text) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_text) }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetInformationsAsync(string _text, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetInformations(_text, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetInformationsDapperAsync<T>(string _text, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("prd.spGetInformations",new {AText=string.IsNullOrWhiteSpace(_text) ? _text : ReplaceArabicWithPersianChars(_text),APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
-}
-
-public ResultSet GetInformations(string _text, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetInformations(_text, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
 #region GetClassification
 
 public System.Data.SqlClient.SqlCommand GetCommand_GetClassification(Guid? _guID, int? timeout = null)
@@ -1015,6 +930,93 @@ public ResultSet DeleteClassification(Guid? _guID, int? timeout = null)
 
 #endregion
 
+#region ModifyClassification
+
+public System.Data.SqlClient.SqlCommand GetCommand_ModifyClassification(bool? _isNewRecord, Guid? _guID, Guid? _parentID, string _name, string _comment, int? timeout = null)
+{
+var cmd = base.CreateCommand("prd.spModifyClassification", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
+					new Parameter { Name = "@AGuID", IsOutput = false, Value = _guID == null ? DBNull.Value : (object)_guID }, 
+					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
+					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
+					new Parameter { Name = "@AComment", IsOutput = false, Value = string.IsNullOrWhiteSpace(_comment) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_comment) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> ModifyClassificationAsync(bool? _isNewRecord, Guid? _guID, Guid? _parentID, string _name, string _comment, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyClassification(_isNewRecord, _guID, _parentID, _name, _comment, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> ModifyClassificationDapperAsync<T>(bool? _isNewRecord, Guid? _guID, Guid? _parentID, string _name, string _comment, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("prd.spModifyClassification",new {AIsNewRecord=_isNewRecord,AGuID=_guID,AParentID=_parentID,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),AComment=string.IsNullOrWhiteSpace(_comment) ? _comment : ReplaceArabicWithPersianChars(_comment)} , timeout );
+}
+
+public ResultSet ModifyClassification(bool? _isNewRecord, Guid? _guID, Guid? _parentID, string _name, string _comment, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyClassification(_isNewRecord, _guID, _parentID, _name, _comment, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetProductClassifications
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetProductClassifications(Guid? _parentID, string _name, string _comment, bool? _allChild, bool? _firstNode, bool? _lastNode, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+var cmd = base.CreateCommand("prd.spGetProductClassifications", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
+					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
+					new Parameter { Name = "@AComment", IsOutput = false, Value = string.IsNullOrWhiteSpace(_comment) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_comment) }, 
+					new Parameter { Name = "@AAllChild", IsOutput = false, Value = _allChild == null ? DBNull.Value : (object)_allChild }, 
+					new Parameter { Name = "@AFirstNode", IsOutput = false, Value = _firstNode == null ? DBNull.Value : (object)_firstNode }, 
+					new Parameter { Name = "@ALastNode", IsOutput = false, Value = _lastNode == null ? DBNull.Value : (object)_lastNode }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetProductClassificationsAsync(Guid? _parentID, string _name, string _comment, bool? _allChild, bool? _firstNode, bool? _lastNode, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetProductClassifications(_parentID, _name, _comment, _allChild, _firstNode, _lastNode, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetProductClassificationsDapperAsync<T>(Guid? _parentID, string _name, string _comment, bool? _allChild, bool? _firstNode, bool? _lastNode, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("prd.spGetProductClassifications",new {AParentID=_parentID,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),AComment=string.IsNullOrWhiteSpace(_comment) ? _comment : ReplaceArabicWithPersianChars(_comment),AAllChild=_allChild,AFirstNode=_firstNode,ALastNode=_lastNode,APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
+}
+
+public ResultSet GetProductClassifications(Guid? _parentID, string _name, string _comment, bool? _allChild, bool? _firstNode, bool? _lastNode, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetProductClassifications(_parentID, _name, _comment, _allChild, _firstNode, _lastNode, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
 #region GetClassifications
 
 public System.Data.SqlClient.SqlCommand GetCommand_GetClassifications(Guid? _parentID, string _name, string _comment, bool? _allChild, bool? _firstNode, bool? _lastNode, int? _pageSize, int? _pageIndex, int? timeout = null)
@@ -1060,18 +1062,16 @@ public ResultSet GetClassifications(Guid? _parentID, string _name, string _comme
 
 #endregion
 
-#region ModifyClassification
+#region GetInformations
 
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyClassification(bool? _isNewRecord, Guid? _guID, Guid? _parentID, string _name, string _comment, int? timeout = null)
+public System.Data.SqlClient.SqlCommand GetCommand_GetInformations(string _text, int? _pageSize, int? _pageIndex, int? timeout = null)
 {
-var cmd = base.CreateCommand("prd.spModifyClassification", 
+var cmd = base.CreateCommand("prd.spGetInformations", 
 	System.Data.CommandType.StoredProcedure, 
 	new Parameter[]{
-					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
-					new Parameter { Name = "@AGuID", IsOutput = false, Value = _guID == null ? DBNull.Value : (object)_guID }, 
-					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-					new Parameter { Name = "@AComment", IsOutput = false, Value = string.IsNullOrWhiteSpace(_comment) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_comment) }, 
+					new Parameter { Name = "@AText", IsOutput = false, Value = string.IsNullOrWhiteSpace(_text) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_text) }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
 	});
 
 			if (timeout != null)
@@ -1079,22 +1079,138 @@ var cmd = base.CreateCommand("prd.spModifyClassification",
 			return cmd;
 }
 
-public async Task<ResultSet> ModifyClassificationAsync(bool? _isNewRecord, Guid? _guID, Guid? _parentID, string _name, string _comment, int? timeout = null)
+public async Task<ResultSet> GetInformationsAsync(string _text, int? _pageSize, int? _pageIndex, int? timeout = null)
 {
-	using(var cmd = GetCommand_ModifyClassification(_isNewRecord, _guID, _parentID, _name, _comment, timeout))
+	using(var cmd = GetCommand_GetInformations(_text, _pageSize, _pageIndex, timeout))
 {
 	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
 }
 }
 
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyClassificationDapperAsync<T>(bool? _isNewRecord, Guid? _guID, Guid? _parentID, string _name, string _comment, int? timeout = null)
+public async Task<AppCore.Result<IEnumerable<T>>> GetInformationsDapperAsync<T>(string _text, int? _pageSize, int? _pageIndex, int? timeout = null)
 {
-	return await  DapperQueryAsync<T>("prd.spModifyClassification",new {AIsNewRecord=_isNewRecord,AGuID=_guID,AParentID=_parentID,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),AComment=string.IsNullOrWhiteSpace(_comment) ? _comment : ReplaceArabicWithPersianChars(_comment)} , timeout );
+	return await  DapperQueryAsync<T>("prd.spGetInformations",new {AText=string.IsNullOrWhiteSpace(_text) ? _text : ReplaceArabicWithPersianChars(_text),APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
 }
 
-public ResultSet ModifyClassification(bool? _isNewRecord, Guid? _guID, Guid? _parentID, string _name, string _comment, int? timeout = null)
+public ResultSet GetInformations(string _text, int? _pageSize, int? _pageIndex, int? timeout = null)
 {
-	using(var cmd = GetCommand_ModifyClassification(_isNewRecord, _guID, _parentID, _name, _comment, timeout))
+	using(var cmd = GetCommand_GetInformations(_text, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetClassificationInformations
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetClassificationInformations(long? _classificationID, int? timeout = null)
+{
+var cmd = base.CreateCommand("prd.spGetClassificationInformations", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AClassificationID", IsOutput = false, Value = _classificationID == null ? DBNull.Value : (object)_classificationID }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetClassificationInformationsAsync(long? _classificationID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetClassificationInformations(_classificationID, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetClassificationInformationsDapperAsync<T>(long? _classificationID, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("prd.spGetClassificationInformations",new {AClassificationID=_classificationID} , timeout );
+}
+
+public ResultSet GetClassificationInformations(long? _classificationID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetClassificationInformations(_classificationID, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region AddClassificationInformation
+
+public System.Data.SqlClient.SqlCommand GetCommand_AddClassificationInformation(long? _classificationID, long? _informationID, int? timeout = null)
+{
+var cmd = base.CreateCommand("prd.spAddClassificationInformation", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AClassificationID", IsOutput = false, Value = _classificationID == null ? DBNull.Value : (object)_classificationID }, 
+					new Parameter { Name = "@AInformationID", IsOutput = false, Value = _informationID == null ? DBNull.Value : (object)_informationID }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> AddClassificationInformationAsync(long? _classificationID, long? _informationID, int? timeout = null)
+{
+	using(var cmd = GetCommand_AddClassificationInformation(_classificationID, _informationID, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> AddClassificationInformationDapperAsync<T>(long? _classificationID, long? _informationID, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("prd.spAddClassificationInformation",new {AClassificationID=_classificationID,AInformationID=_informationID} , timeout );
+}
+
+public ResultSet AddClassificationInformation(long? _classificationID, long? _informationID, int? timeout = null)
+{
+	using(var cmd = GetCommand_AddClassificationInformation(_classificationID, _informationID, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region DeleteClassificationInformation
+
+public System.Data.SqlClient.SqlCommand GetCommand_DeleteClassificationInformation(long? _classificationID, long? _informationID, int? timeout = null)
+{
+var cmd = base.CreateCommand("prd.spDeleteClassificationInformation", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AClassificationID", IsOutput = false, Value = _classificationID == null ? DBNull.Value : (object)_classificationID }, 
+					new Parameter { Name = "@AInformationID", IsOutput = false, Value = _informationID == null ? DBNull.Value : (object)_informationID }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> DeleteClassificationInformationAsync(long? _classificationID, long? _informationID, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteClassificationInformation(_classificationID, _informationID, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> DeleteClassificationInformationDapperAsync<T>(long? _classificationID, long? _informationID, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("prd.spDeleteClassificationInformation",new {AClassificationID=_classificationID,AInformationID=_informationID} , timeout );
+}
+
+public ResultSet DeleteClassificationInformation(long? _classificationID, long? _informationID, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteClassificationInformation(_classificationID, _informationID, timeout))
 {
 	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
 }

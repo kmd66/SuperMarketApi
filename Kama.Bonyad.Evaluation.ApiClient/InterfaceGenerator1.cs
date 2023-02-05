@@ -69,6 +69,20 @@ namespace Kama.Bonyad.Evaluation.ApiClient.Interface
 
 					 }
 
+  		 public interface IClassificationService: IService
+		 {
+						 				Task<AppCore.Result<model.Classification>> Add(model.Classification model, IDictionary<string, string> httpHeaders = null);
+
+						 				Task<AppCore.Result<model.Classification>> Edit(model.Classification model, IDictionary<string, string> httpHeaders = null);
+
+						 				Task<AppCore.Result> Delete(model.Classification model, IDictionary<string, string> httpHeaders = null);
+
+						 				Task<AppCore.Result<model.Classification>> Get(model.Classification model, IDictionary<string, string> httpHeaders = null);
+
+						 				Task<AppCore.Result<IEnumerable<model.Classification>>> List(model.ClassificationVM model, IDictionary<string, string> httpHeaders = null);
+
+					 }
+
   		 public interface IProductService: IService
 		 {
 						 				Task<AppCore.Result<model.Product>> Add(model.Product model, IDictionary<string, string> httpHeaders = null);
@@ -88,6 +102,12 @@ namespace Kama.Bonyad.Evaluation.ApiClient.Interface
 						 				Task<AppCore.Result<model.Information>> Add(model.Information model, IDictionary<string, string> httpHeaders = null);
 
 						 				Task<AppCore.Result<IEnumerable<model.Information>>> List(model.InformationVM model, IDictionary<string, string> httpHeaders = null);
+
+						 				Task<AppCore.Result<model.Information>> AddClassificationInformation(model.Information model, IDictionary<string, string> httpHeaders = null);
+
+						 				Task<AppCore.Result<IEnumerable<model.Information>>> ListClassificationInformation(model.InformationVM model, IDictionary<string, string> httpHeaders = null);
+
+						 				Task<AppCore.Result> DeleteClassificationInformation(model.Information model, IDictionary<string, string> httpHeaders = null);
 
 					 }
 

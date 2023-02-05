@@ -155,6 +155,51 @@ namespace Kama.Bonyad.Evaluation.ApiClient
 
             		 }
   
+		 partial class ClassificationService: Service, IClassificationService
+		 {
+			public ClassificationService(IEvaluationClient client)
+			{
+				_client = client;
+			}
+			readonly IEvaluationClient _client;
+
+			            public virtual Task<AppCore.Result<Kama.Bonyad.Evaluation.Core.Model.Classification>> Add( Kama.Bonyad.Evaluation.Core.Model.Classification model, IDictionary<string, string> httpHeaders = null)
+			{
+						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
+			const string url = "api/v1/Classification/Add";
+							return _client.SendAsync<Kama.Bonyad.Evaluation.Core.Model.Classification>(true, url, routeParamValues, httpHeaders, model);
+						}
+
+                        public virtual Task<AppCore.Result<Kama.Bonyad.Evaluation.Core.Model.Classification>> Edit( Kama.Bonyad.Evaluation.Core.Model.Classification model, IDictionary<string, string> httpHeaders = null)
+			{
+						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
+			const string url = "api/v1/Classification/Edit";
+							return _client.SendAsync<Kama.Bonyad.Evaluation.Core.Model.Classification>(true, url, routeParamValues, httpHeaders, model);
+						}
+
+                        public virtual Task<AppCore.Result> Delete( Kama.Bonyad.Evaluation.Core.Model.Classification model, IDictionary<string, string> httpHeaders = null)
+			{
+						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
+			const string url = "api/v1/Classification/Delete";
+							return _client.SendAsync(true, url, routeParamValues, httpHeaders, model);
+						}
+
+                        public virtual Task<AppCore.Result<Kama.Bonyad.Evaluation.Core.Model.Classification>> Get( Kama.Bonyad.Evaluation.Core.Model.Classification model, IDictionary<string, string> httpHeaders = null)
+			{
+						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
+			const string url = "api/v1/Classification/Get";
+							return _client.SendAsync<Kama.Bonyad.Evaluation.Core.Model.Classification>(true, url, routeParamValues, httpHeaders, model);
+						}
+
+                        public virtual Task<AppCore.Result<IEnumerable<Kama.Bonyad.Evaluation.Core.Model.Classification>>> List( Kama.Bonyad.Evaluation.Core.Model.ClassificationVM model, IDictionary<string, string> httpHeaders = null)
+			{
+						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
+			const string url = "api/v1/Classification/List";
+							return _client.SendAsync<IEnumerable<Kama.Bonyad.Evaluation.Core.Model.Classification>>(true, url, routeParamValues, httpHeaders, model);
+						}
+
+            		 }
+  
 		 partial class ProductService: Service, IProductService
 		 {
 			public ProductService(IEvaluationClient client)
@@ -220,6 +265,27 @@ namespace Kama.Bonyad.Evaluation.ApiClient
 						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
 			const string url = "api/v1/Information/List";
 							return _client.SendAsync<IEnumerable<Kama.Bonyad.Evaluation.Core.Model.Information>>(true, url, routeParamValues, httpHeaders, model);
+						}
+
+                        public virtual Task<AppCore.Result<Kama.Bonyad.Evaluation.Core.Model.Information>> AddClassificationInformation( Kama.Bonyad.Evaluation.Core.Model.Information model, IDictionary<string, string> httpHeaders = null)
+			{
+						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
+			const string url = "api/v1/Information/AddClassificationInformation";
+							return _client.SendAsync<Kama.Bonyad.Evaluation.Core.Model.Information>(true, url, routeParamValues, httpHeaders, model);
+						}
+
+                        public virtual Task<AppCore.Result<IEnumerable<Kama.Bonyad.Evaluation.Core.Model.Information>>> ListClassificationInformation( Kama.Bonyad.Evaluation.Core.Model.InformationVM model, IDictionary<string, string> httpHeaders = null)
+			{
+						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
+			const string url = "api/v1/Information/ListClassificationInformation";
+							return _client.SendAsync<IEnumerable<Kama.Bonyad.Evaluation.Core.Model.Information>>(true, url, routeParamValues, httpHeaders, model);
+						}
+
+                        public virtual Task<AppCore.Result> DeleteClassificationInformation( Kama.Bonyad.Evaluation.Core.Model.Information model, IDictionary<string, string> httpHeaders = null)
+			{
+						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
+			const string url = "api/v1/Information/DeleteClassificationInformation";
+							return _client.SendAsync(true, url, routeParamValues, httpHeaders, model);
 						}
 
             		 }

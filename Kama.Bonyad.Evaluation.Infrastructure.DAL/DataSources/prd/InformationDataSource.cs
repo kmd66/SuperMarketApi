@@ -31,6 +31,23 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
             }
         }
 
+        public async Task<Result<Information>> AddClassificationInformationAsync(Information model)
+        {
+            try
+            {
+                var result = (await _dbPRD.AddClassificationInformationAsync(
+                    _classificationID:model.ClassificationID,
+                    _informationID: model.InformationID
+                    )).ToActionResult<Information>();
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
         public async Task<Result<IEnumerable<Information>>> ListAsync(InformationVM model)
         {
             try
@@ -40,6 +57,38 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
                     _pageIndex:model.PageIndex,
                     _pageSize:model.PageSize
                     )).ToListActionResult<Information>();
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+        public async Task<Result<IEnumerable<Information>>> ListClassificationInformationAsync(InformationVM model)
+        {
+            try
+            {
+                var result = (await _dbPRD.GetClassificationInformationsAsync(
+                    _classificationID:model.ClassificationID
+                    )).ToListActionResult<Information>();
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+        public async Task<Result> DeleteClassificationInformationAsync(Information model)
+        {
+            try
+            {
+                var result = (await _dbPRD.DeleteClassificationInformationAsync(
+                    _classificationID:model.ClassificationID,
+                    _informationID:model.InformationID
+                    )).ToActionResult<Information>();
+
                 return result;
             }
             catch (Exception e)

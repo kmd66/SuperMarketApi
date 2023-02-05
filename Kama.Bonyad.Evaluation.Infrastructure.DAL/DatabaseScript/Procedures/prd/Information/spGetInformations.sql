@@ -15,7 +15,7 @@ BEGIN
 	
 	DECLARE 
 		@Text NVARCHAR(MAX) = TRIM(@AText),
-		@PageSize INT = COALESCE(@APageSize,100),
+		@PageSize INT = COALESCE(@APageSize,1000),
 		@PageIndex INT = COALESCE(@APageIndex, 1)
 	
 	SELECT 

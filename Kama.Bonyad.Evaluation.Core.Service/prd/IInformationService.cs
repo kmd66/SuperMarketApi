@@ -12,5 +12,11 @@ namespace Kama.Bonyad.Evaluation.Core.Service
 
         Task<Result<IEnumerable<Information>>> ListAsync(InformationVM model);
 
+        Task<Result<Information>> AddClassificationInformationAsync(Information model);
+
+        Task<Result<IEnumerable<Information>>> ListClassificationInformationAsync(InformationVM model);
+
+        Task<Result> DeleteClassificationInformationAsync(Information model);
+
     }
 }
