@@ -80,7 +80,7 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
                 if (result.Data != null)
                 {
                     var resultAttachment = await _attachmentDataSource.ListAsync(new AttachmentListVM { ParentIDs = new List<Guid> { result.Data .GuID} });
-                    result.Data.Attachment = resultAttachment.Data.FirstOrDefault();
+                    result.Data.Attachments = resultAttachment.Data.ToList();
                 }
                 return result;
             }
@@ -109,7 +109,7 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
                     var resultAttachment = await _attachmentDataSource.ListAsync(new AttachmentListVM { ParentIDs = result.Data.Select(x => x.GuID).ToList() });
                     foreach (var Product in result.Data)
                     {
-                        Product.Attachment = resultAttachment.Data.FirstOrDefault(x => x.ParentID == Product.GuID);
+                        Product.Attachments = resultAttachment.Data.Where(x => x.ParentID == Product.GuID).ToList();
                     }
                 }
 

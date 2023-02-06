@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 
 namespace Kama.Bonyad.Evaluation.Core.Model
 {
@@ -20,6 +21,6 @@ namespace Kama.Bonyad.Evaluation.Core.Model
         public string BrandFaName { get; set; }
         public string BrandEnName { get; set; }
 
-        public Attachment Attachment { get; set; }
+        public List<Attachment> Attachments { get; set; }
     }
 }
