@@ -4,11 +4,10 @@ namespace Kama.Bonyad.Evaluation.Core.Model
 {
     public class ProductVM : ListVM
     {
-        public long ParentID { get; set; }
-        public string Name { get; set; }
-        public string Comment { get; set; }
-        public long StartPrice { get; set; }
-        public long EndPrice { get; set; }
+        public long ClassificationID { get; set; }
+        public long BrandID { get; set; }
+        public string FaName { get; set; }
+        public string EnName { get; set; }
         public bool IsAttachment { get; set; }
     }
 }

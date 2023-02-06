@@ -43,21 +43,15 @@ namespace Kama.Bonyad.Evaluation.Domain.Services
 
         private async Task<AppCore.Result<Product>> _ValidateForSave(Product model,bool addState)
         {
-            if (string.IsNullOrEmpty(model.Name))
+            if (string.IsNullOrEmpty(model.FaName))
                 return AppCore.Result<Product>.Failure(message: "نام وارد نشده است");
-            if (string.IsNullOrEmpty(model.Comment))
-                return AppCore.Result<Product>.Failure(message: "توضیح وارد نشده است");
-            if (model.Price == 0)
-                return AppCore.Result<Product>.Failure(message: "قیمت وارد نشده است");
-            if (model.Price < model.Discount)
-                return AppCore.Result<Product>.Failure(message: "قیمت کمتر از تخفیف است");
-            if (model.UnitOfMeasure == UnitOfMeasureType.Unknown)
-                return AppCore.Result<Product>.Failure(message: "واحد اندازه گیری وارد نشده است");
+            if (string.IsNullOrEmpty(model.EnName))
+                return AppCore.Result<Product>.Failure(message: "نام انگلیسی وارد نشده است");
 
+            if (model.ClassificationID == 0 && addState)
+                return AppCore.Result<Product>.Failure(message: "والد وارد نشده است");
             if (model.BrandID == 0 && addState)
                 return AppCore.Result<Product>.Failure(message: "برند وارد نشده است");
-            if (model.ParentID == 0 && addState)
-                return AppCore.Result<Product>.Failure(message: "والد وارد نشده است");
 
             if (string.IsNullOrEmpty(model.Information))
                 model.Information = "{}";

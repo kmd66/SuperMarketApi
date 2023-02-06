@@ -9,15 +9,11 @@ CREATE PROCEDURE prd.spModifyProduct
 	@AIsNewRecord BIT,
 	@AID BIGINT,
 	@AGuID UNIQUEIDENTIFIER,
-	@AParentID BIGINT,
-	@AName NVARCHAR(MAX),
-	@AComment NVARCHAR(MAX),
-	@APrice BIGINT,
-	@ADiscount BIGINT,
-	@AInformation NVARCHAR(MAX),
-	@AUnitOfMeasure TINYINT,
-	@AMinimumToAlert INT,
-	@ABrandID BIGINT
+	@AClassificationID BIGINT,
+	@ABrandID BIGINT,
+	@AFaName NVARCHAR(MAX),
+	@AEnName NVARCHAR(MAX),
+	@AInformation NVARCHAR(MAX)
 WITH ENCRYPTION
 AS
 BEGIN
@@ -28,15 +24,11 @@ BEGIN
 		@IsNewRecord BIT = ISNULL(@AIsNewRecord, 0),
 		@ID  BIGINT = @AID ,
 		@GuID  UNIQUEIDENTIFIER = @AGuID ,
-		@ParentID BIGINT = @AParentID,
-		@Name NVARCHAR(MAX) = TRIM(@AName),
-		@Comment NVARCHAR(MAX) = TRIM(@AComment),
-		@Price BIGINT = @APrice,
-		@Discount BIGINT = @ADiscount,
-		@Information NVARCHAR(MAX) = TRIM(@AInformation),
-		@UnitOfMeasure TINYINT =@AUnitOfMeasure,
-		@MinimumToAlert INT = @AMinimumToAlert ,
-		@BrandID BIGINT = @ABrandID
+		@ClassificationID BIGINT = @AClassificationID,
+		@BrandID BIGINT = @ABrandID,
+		@FaName NVARCHAR(MAX) = TRIM(@AFaName),
+		@EnName NVARCHAR(MAX) = TRIM(@AEnName),
+		@Information NVARCHAR(MAX) = TRIM(@AInformation)
 
 	BEGIN TRY
 		BEGIN TRAN
@@ -44,15 +36,14 @@ BEGIN
 		IF @IsNewRecord = 1 -- insert
 		BEGIN
 			INSERT INTO prd.Product
-				([GuID], ParentID, [Name], Comment, Price, Discount, Information, CreateDate, UnitOfMeasure, MinimumToAlert, [BrandID])
+				([GuID], [FaName], [EnName], [ClassificationID], [BrandID], [CreateDate], [Information])
 			VALUES
-				(@AGuID, @ParentID, @Name, @Comment, @Price, @Discount, @Information, GETDATE(), @UnitOfMeasure, @MinimumToAlert, @BrandID)
-			EXEC prd.spIndexCountStock
+				(@AGuID, @FaName, @EnName, @ClassificationID, @BrandID, GETDATE(), @Information)
 		END
 		ELSE
 		BEGIN -- update
 			UPDATE prd.Product
-			SET [Name] = @Name, Comment = @Comment, Price = @Price, Discount = @Discount, Information = @AInformation, UnitOfMeasure=@UnitOfMeasure, MinimumToAlert =@MinimumToAlert
+			SET [FaName] = @FaName, EnName = @EnName, Information = @Information
 			WHERE ID = @ID
 
 		END

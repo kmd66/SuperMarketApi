@@ -10,22 +10,22 @@ WITH ENCRYPTION, SCHEMABINDING
 AS
 	
 	SELECT 
-			prd.ID, 
-			prd.GuID, 
-			prd.ParentID, 
-			prd.Name, 
-			prd.Comment, 
-			prd.Price, 
-			prd.Discount, 
-			prd.Information,
-			prd.CreateDate,
-			prd.[UnitOfMeasure],
-			prd.MinimumToAlert,
-			prc.GuID ClassificationGuID,
-			prc.ID ClassificationID,
-			prc.Name ClassificationName
-		FROM prd.Product prd
-		INNER JOIN [prd].[ProductClassification] prc 
-			ON prc.ID = prd.ParentID
-		WHERE prc.Removed = 0
-			AND  prd.Removed = 0
+			prod.ID, 
+			prod.GuID, 
+			prod.FaName, 
+			prod.EnName, 
+			prod.Information,
+			prod.CreateDate,
+			cals.GuID ClassificationGuID,
+			cals.ID ClassificationID,
+			cals.Name ClassificationName,
+			brnd.ID BrandID,
+			brnd.GuID BrandGuID,
+			brnd.FaName BrandFaName,
+			brnd.EnName BrandEnName
+		FROM prd.Product prod
+		INNER JOIN [prd].[Classification] cals ON cals.ID = prod.ClassificationID
+		INNER JOIN [pbl].[Brand] brnd ON brnd.ID = prod.BrandID
+		WHERE prod.Removed = 0
+			AND  cals.Removed = 0
+			AND  brnd.Removed = 0

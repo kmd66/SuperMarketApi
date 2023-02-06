@@ -81,6 +81,10 @@
     <Content Include="DatabaseScript\Procedures\prd\Information\spAddClassificationInformation.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Information\spDeleteClassificationInformation.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Information\spGetClassificationInformations.sql" />
+    <Content Include="DatabaseScript\Procedures\prd\Product2\spDeleteProduct.sql" />
+    <Content Include="DatabaseScript\Procedures\prd\Product2\spGetProduct.sql" />
+    <Content Include="DatabaseScript\Procedures\prd\Product2\spGetProducts.sql" />
+    <Content Include="DatabaseScript\Procedures\prd\Product2\spModifyProduct.sql" />
     <Content Include="DatabaseScript\Procedures\prd\ProductClassification\spDeleteProductClassification.sql" />
     <Content Include="DatabaseScript\Procedures\prd\ProductClassification\spGetLastNodeProductClassifications.sql" />
     <Content Include="DatabaseScript\Procedures\prd\ProductClassification\spGetProductClassification.sql" />
@@ -115,6 +119,7 @@
     <Content Include="DatabaseScript\Synonyms\Users.sql" />
     <Content Include="DatabaseScript\Synonyms\_Position.sql" />
     <Content Include="DatabaseScript\Views\_Product.sql" />
+    <Content Include="DatabaseScript\backTabel.sql" />
     <Content Include="obj\Debug\TempPE\DatabaseModel1.cs.dll" />
     <Content Include="obj\Debug\TempPE\DatabaseScript.SpGenerator1.sql.dll" />
     <None Include="DatabaseScript\devops.bat" />

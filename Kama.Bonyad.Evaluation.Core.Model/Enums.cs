@@ -59,6 +59,7 @@ namespace Kama.Bonyad.Evaluation.Core.Model
         تصویر_دسته_بندی = 1,
         تصویر_کالا = 2,
         تصویر_برند = 3,
+        تصاویر_کالا = 4,
     }
 
     public enum UnitOfMeasureType : byte

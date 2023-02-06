@@ -24,17 +24,13 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
             {
                 var result = (await _dbPRD.ModifyProductAsync(
                     _isNewRecord: isNewRecord,
-                    _guID:model.GuID,
-                    _name:model.Name,
-                    _comment: model.Comment,
-                    _parentID:model.ParentID,
                     _id:model.ID,
-                    _discount:model.Discount,
-                    _price:model.Price,
-                    _information:model.Information,
-                    _unitOfMeasure:(byte)model.UnitOfMeasure,
-                    _minimumToAlert: model.MinimumToAlert,
-                    _brandID:model.BrandID
+                    _guID:model.GuID,
+                    _classificationID:model.ClassificationID,
+                    _brandID: model.BrandID,
+                    _faName:model.FaName,
+                    _enName:model.EnName,
+                    _information:model.Information
                     )).ToActionResult<Core.Model.Product>();
 
                 if (result.Success)
@@ -99,11 +95,10 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
             try
             {
                 var result = (await _dbPRD.GetProductsAsync(
-                    _parentID: model.ParentID,
-                    _name:model.Name,
-                    _comment: model.Comment,
-                    _startPrice:model.StartPrice,
-                    _endPrice:model.EndPrice,
+                    _classificationID: model.ClassificationID,
+                    _brandID: model.BrandID,
+                    _faName: model.FaName,
+                    _enName: model.EnName,
                     _pageIndex:model.PageIndex,
                     _pageSize: model.PageSize
                     
