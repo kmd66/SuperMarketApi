@@ -1,11 +1,11 @@
 ﻿USE [Kama.Sm]
 GO
 
-IF EXISTS(SELECT 1 FROM sys.procedures WHERE [object_id] = OBJECT_ID('prd.spModifyProduct'))
-	DROP PROCEDURE prd.spModifyProduct
+IF EXISTS(SELECT 1 FROM sys.procedures WHERE [object_id] = OBJECT_ID('prd.spModifyItem'))
+	DROP PROCEDURE prd.spModifyItem
 GO
 
-CREATE PROCEDURE prd.spModifyProduct
+CREATE PROCEDURE prd.spModifyItem
 	@AIsNewRecord BIT,
 	@AID BIGINT,
 	@AGuID UNIQUEIDENTIFIER,
@@ -35,14 +35,14 @@ BEGIN
 
 		IF @IsNewRecord = 1 -- insert
 		BEGIN
-			INSERT INTO prd.Product
+			INSERT INTO prd.Item
 				([GuID], [FaName], [EnName], [ClassificationID], [BrandID], [CreateDate], [Information])
 			VALUES
 				(@AGuID, @FaName, @EnName, @ClassificationID, @BrandID, GETDATE(), @Information)
 		END
 		ELSE
 		BEGIN -- update
-			UPDATE prd.Product
+			UPDATE prd.Item
 			SET [FaName] = @FaName, EnName = @EnName, Information = @Information
 			WHERE ID = @ID
 

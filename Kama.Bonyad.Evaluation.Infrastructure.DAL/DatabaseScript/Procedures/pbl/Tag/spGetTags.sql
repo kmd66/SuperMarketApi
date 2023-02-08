@@ -17,11 +17,11 @@ BEGIN
 		@ItemID BIGINT = @AItemID
 	
 	SELECT 
-		pblTag.TagID,
-		pblTag.ProductID,
+		itemTag.TagID,
+		itemTag.itemID,
 		[Tag] TagName
-	FROM [pbl].[ProductTags] pblTag
-	INNER JOIN [pbl].[Tags] tag on pblTag.TagID = tag.ID
-	WHERE pblTag.ProductID = @ItemID
+	FROM prd.[itemTags] itemTag
+	INNER JOIN [pbl].[Tags] tag on itemTag.TagID = tag.ID
+	WHERE itemTag.itemID = @ItemID
 END
 

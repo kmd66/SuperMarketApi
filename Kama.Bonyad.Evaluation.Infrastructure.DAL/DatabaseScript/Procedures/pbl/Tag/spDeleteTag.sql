@@ -17,6 +17,6 @@ BEGIN
 	DECLARE @TagID INT = @ATagID,
 		@ItemID BIGINT = @AItemID
 		
-	DELETE [pbl].[ProductTags] WHERE TagID = @TagID AND ProductID = @ItemID
+	DELETE prd.[ItemTags] WHERE TagID = @TagID AND itemID = @ItemID
 
 END

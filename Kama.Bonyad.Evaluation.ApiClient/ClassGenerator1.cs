@@ -200,47 +200,47 @@ namespace Kama.Bonyad.Evaluation.ApiClient
 
             		 }
   
-		 partial class ProductService: Service, IProductService
+		 partial class ItemService: Service, IItemService
 		 {
-			public ProductService(IEvaluationClient client)
+			public ItemService(IEvaluationClient client)
 			{
 				_client = client;
 			}
 			readonly IEvaluationClient _client;
 
-			            public virtual Task<AppCore.Result<Kama.Bonyad.Evaluation.Core.Model.Product>> Add( Kama.Bonyad.Evaluation.Core.Model.Product model, IDictionary<string, string> httpHeaders = null)
+			            public virtual Task<AppCore.Result<Kama.Bonyad.Evaluation.Core.Model.Item>> Add( Kama.Bonyad.Evaluation.Core.Model.Item model, IDictionary<string, string> httpHeaders = null)
 			{
 						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
-			const string url = "api/v1/Product/Add";
-							return _client.SendAsync<Kama.Bonyad.Evaluation.Core.Model.Product>(true, url, routeParamValues, httpHeaders, model);
+			const string url = "api/v1/Item/Add";
+							return _client.SendAsync<Kama.Bonyad.Evaluation.Core.Model.Item>(true, url, routeParamValues, httpHeaders, model);
 						}
 
-                        public virtual Task<AppCore.Result<Kama.Bonyad.Evaluation.Core.Model.Product>> Edit( Kama.Bonyad.Evaluation.Core.Model.Product model, IDictionary<string, string> httpHeaders = null)
+                        public virtual Task<AppCore.Result<Kama.Bonyad.Evaluation.Core.Model.Item>> Edit( Kama.Bonyad.Evaluation.Core.Model.Item model, IDictionary<string, string> httpHeaders = null)
 			{
 						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
-			const string url = "api/v1/Product/Edit";
-							return _client.SendAsync<Kama.Bonyad.Evaluation.Core.Model.Product>(true, url, routeParamValues, httpHeaders, model);
+			const string url = "api/v1/Item/Edit";
+							return _client.SendAsync<Kama.Bonyad.Evaluation.Core.Model.Item>(true, url, routeParamValues, httpHeaders, model);
 						}
 
-                        public virtual Task<AppCore.Result> Delete( Kama.Bonyad.Evaluation.Core.Model.Product model, IDictionary<string, string> httpHeaders = null)
+                        public virtual Task<AppCore.Result> Delete( Kama.Bonyad.Evaluation.Core.Model.Item model, IDictionary<string, string> httpHeaders = null)
 			{
 						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
-			const string url = "api/v1/Product/Delete";
+			const string url = "api/v1/Item/Delete";
 							return _client.SendAsync(true, url, routeParamValues, httpHeaders, model);
 						}
 
-                        public virtual Task<AppCore.Result<Kama.Bonyad.Evaluation.Core.Model.Product>> Get( Kama.Bonyad.Evaluation.Core.Model.Product model, IDictionary<string, string> httpHeaders = null)
+                        public virtual Task<AppCore.Result<Kama.Bonyad.Evaluation.Core.Model.Item>> Get( Kama.Bonyad.Evaluation.Core.Model.Item model, IDictionary<string, string> httpHeaders = null)
 			{
 						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
-			const string url = "api/v1/Product/Get";
-							return _client.SendAsync<Kama.Bonyad.Evaluation.Core.Model.Product>(true, url, routeParamValues, httpHeaders, model);
+			const string url = "api/v1/Item/Get";
+							return _client.SendAsync<Kama.Bonyad.Evaluation.Core.Model.Item>(true, url, routeParamValues, httpHeaders, model);
 						}
 
-                        public virtual Task<AppCore.Result<IEnumerable<Kama.Bonyad.Evaluation.Core.Model.Product>>> List( Kama.Bonyad.Evaluation.Core.Model.ProductVM model, IDictionary<string, string> httpHeaders = null)
+                        public virtual Task<AppCore.Result<IEnumerable<Kama.Bonyad.Evaluation.Core.Model.Item>>> List( Kama.Bonyad.Evaluation.Core.Model.ItemVM model, IDictionary<string, string> httpHeaders = null)
 			{
 						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
-			const string url = "api/v1/Product/List";
-							return _client.SendAsync<IEnumerable<Kama.Bonyad.Evaluation.Core.Model.Product>>(true, url, routeParamValues, httpHeaders, model);
+			const string url = "api/v1/Item/List";
+							return _client.SendAsync<IEnumerable<Kama.Bonyad.Evaluation.Core.Model.Item>>(true, url, routeParamValues, httpHeaders, model);
 						}
 
             		 }

@@ -83,17 +83,17 @@ namespace Kama.Bonyad.Evaluation.ApiClient.Interface
 
 					 }
 
-  		 public interface IProductService: IService
+  		 public interface IItemService: IService
 		 {
-						 				Task<AppCore.Result<model.Product>> Add(model.Product model, IDictionary<string, string> httpHeaders = null);
+						 				Task<AppCore.Result<model.Item>> Add(model.Item model, IDictionary<string, string> httpHeaders = null);
 
-						 				Task<AppCore.Result<model.Product>> Edit(model.Product model, IDictionary<string, string> httpHeaders = null);
+						 				Task<AppCore.Result<model.Item>> Edit(model.Item model, IDictionary<string, string> httpHeaders = null);
 
-						 				Task<AppCore.Result> Delete(model.Product model, IDictionary<string, string> httpHeaders = null);
+						 				Task<AppCore.Result> Delete(model.Item model, IDictionary<string, string> httpHeaders = null);
 
-						 				Task<AppCore.Result<model.Product>> Get(model.Product model, IDictionary<string, string> httpHeaders = null);
+						 				Task<AppCore.Result<model.Item>> Get(model.Item model, IDictionary<string, string> httpHeaders = null);
 
-						 				Task<AppCore.Result<IEnumerable<model.Product>>> List(model.ProductVM model, IDictionary<string, string> httpHeaders = null);
+						 				Task<AppCore.Result<IEnumerable<model.Item>>> List(model.ItemVM model, IDictionary<string, string> httpHeaders = null);
 
 					 }
 

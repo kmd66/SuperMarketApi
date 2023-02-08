@@ -1,11 +1,11 @@
 ﻿USE [Kama.Sm]
 GO
 
-IF EXISTS(SELECT 1 FROM sys.procedures WHERE [object_id] = OBJECT_ID('prd.spGetProduct'))
-	DROP PROCEDURE prd.spGetProduct
+IF EXISTS(SELECT 1 FROM sys.procedures WHERE [object_id] = OBJECT_ID('prd.spGetItem'))
+	DROP PROCEDURE prd.spGetItem
 GO
 
-CREATE PROCEDURE prd.spGetProduct
+CREATE PROCEDURE prd.spGetItem
 	@AID BIGINT,
 	@AGuID UNIQUEIDENTIFIER
 WITH ENCRYPTION
@@ -19,7 +19,7 @@ BEGIN
 	
 	
 	SELECT *
-	FROM prd._Product
+	FROM prd._Item
 	WHERE (@ID <> 0 AND [ID] = @ID)
 		OR (@GuID IS NOT NULL AND [GuID] = @GuID)
 

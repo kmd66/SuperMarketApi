@@ -1,0 +1,20 @@
+﻿USE [Kama.Sm]
+GO
+
+IF EXISTS(SELECT 1 FROM sys.procedures WHERE [object_id] = OBJECT_ID('prd.spDeleteItem'))
+	DROP PROCEDURE prd.spDeleteItem
+GO
+
+CREATE PROCEDURE prd.spDeleteItem
+	@AID BIGINT
+WITH ENCRYPTION
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SET XACT_ABORT ON;
+
+	DECLARE @ID BIGINT= @AID
+		
+	UPDATE prd.Item SET Removed = 1 WHERE ID =@ID 
+
+END

@@ -31,11 +31,11 @@ BEGIN
 			SET @TAGID  =(SELECT TOP 1 ID FROM [pbl].[Tags] WHERE Tag  = @Tag)
 		END
 
-		SET @SelectID  =(SELECT TOP 1 TAGID FROM [pbl].[ProductTags] WHERE TagID = @TAGID AND ProductID = @ItemID)
+		SET @SelectID  =(SELECT TOP 1 TAGID FROM prd.[itemTags] WHERE TagID = @TAGID AND itemID = @ItemID)
 		
 		IF @SelectID IS NULL 
 		BEGIN
-			INSERT [pbl].[ProductTags](TagID, ProductID)
+			INSERT prd.[itemTags](TagID, itemID)
 			VALUES (@TagID, @ItemID)
 		END
 

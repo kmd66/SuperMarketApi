@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Kama.Bonyad.Evaluation.Core.Model
 {
-    public class Product : Model
+    public class Item : Model
     {
         public string FaName { get; set; }
         public string EnName { get; set; }

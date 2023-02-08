@@ -2,7 +2,7 @@
 
 namespace Kama.Bonyad.Evaluation.Core.Model
 {
-    public class ProductVM : ListVM
+    public class ItemVM : ListVM
     {
         public long ClassificationID { get; set; }
         public long BrandID { get; set; }

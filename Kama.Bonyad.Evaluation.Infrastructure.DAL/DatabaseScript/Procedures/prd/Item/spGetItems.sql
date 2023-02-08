@@ -1,11 +1,11 @@
 ﻿USE [Kama.Sm]
 GO
 
-IF EXISTS(SELECT 1 FROM sys.procedures WHERE [object_id] = OBJECT_ID('prd.spGetProducts'))
-	DROP PROCEDURE prd.spGetProducts
+IF EXISTS(SELECT 1 FROM sys.procedures WHERE [object_id] = OBJECT_ID('prd.spGetItems'))
+	DROP PROCEDURE prd.spGetItems
 GO
 
-CREATE PROCEDURE prd.spGetProducts
+CREATE PROCEDURE prd.spGetItems
 	@AClassificationID BIGINT,
 	@ABrandID BIGINT,
 	@AFaName NVARCHAR(MAX),
@@ -34,7 +34,7 @@ BEGIN
 	
 	SELECT
 		Count(ID) OVER() Total, *
-	FROM prd._Product
+	FROM prd._Item
 	WHERE (@ClassificationID = 0 OR ClassificationID = @ClassificationID)
 		AND(@BrandID  = 0 OR BrandID = @BrandID)
 		AND(@FaName IS NULL OR FaName LIKE '%' + @FaName + '%')

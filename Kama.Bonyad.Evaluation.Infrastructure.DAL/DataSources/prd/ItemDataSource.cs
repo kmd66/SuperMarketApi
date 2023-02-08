@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
 {
-    class ProductDataSource : DataSource, Core.DataSource.IProductDataSource
+    class ItemDataSource : DataSource, Core.DataSource.IItemDataSource
     {
-        public ProductDataSource(AppCore.IOC.IContainer container
+        public ItemDataSource(AppCore.IOC.IContainer container
             , Core.DataSource.IAttachmentDataSource attachmentDataSource)
             : base(container)
         {
@@ -18,11 +18,11 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
         }
         Core.DataSource.IAttachmentDataSource _attachmentDataSource;
 
-        private async Task<AppCore.Result<Core.Model.Product>> ModifyAsync(bool isNewRecord, Product model)
+        private async Task<AppCore.Result<Core.Model.Item>> ModifyAsync(bool isNewRecord, Item model)
         {
             try
             {
-                var result = (await _dbPRD.ModifyProductAsync(
+                var result = (await _dbPRD.ModifyItemAsync(
                     _isNewRecord: isNewRecord,
                     _id:model.ID,
                     _guID:model.GuID,
@@ -31,33 +31,33 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
                     _faName:model.FaName,
                     _enName:model.EnName,
                     _information:model.Information
-                    )).ToActionResult<Core.Model.Product>();
+                    )).ToActionResult<Core.Model.Item>();
 
                 if (result.Success)
-                    return await GetAsync(new Product { GuID= model.GuID });
+                    return await GetAsync(new Item { GuID= model.GuID });
 
                 return result;
             }
             catch (Exception e)
             {
-                return LogError<Core.Model.Product>(e);
+                return LogError<Core.Model.Item>(e);
             }
         }
 
-        public Task<Result<Product>> AddAsync(Product model)
+        public Task<Result<Item>> AddAsync(Item model)
         {
             model.GuID = Guid.NewGuid();
             return ModifyAsync(true, model);
         }
 
-        public Task<Result<Product>> EditAsync(Product model)
+        public Task<Result<Item>> EditAsync(Item model)
             => ModifyAsync(false, model);
 
-        public async Task<Result> DeleteAsync(Product model)
+        public async Task<Result> DeleteAsync(Item model)
         {
             try
             {
-                var result = (await _dbPRD.DeleteProductAsync(_id: model.ID))
+                var result = (await _dbPRD.DeleteItemAsync(_id: model.ID))
                                     .ToActionResult(); 
 
                 return result;
@@ -68,14 +68,14 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
             }
         }
 
-        public async Task<Result<Product>> GetAsync(Product model)
+        public async Task<Result<Item>> GetAsync(Item model)
         {
             try
             {
-                var result = (await _dbPRD.GetProductAsync(
+                var result = (await _dbPRD.GetItemAsync(
                     _id: model.ID,
                     _guID: model.GuID
-                    )).ToActionResult<Product>();
+                    )).ToActionResult<Item>();
 
                 if (result.Data != null)
                 {
@@ -90,11 +90,11 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
             }
         }
 
-        public async Task<Result<IEnumerable<Product>>> ListAsync(ProductVM model)
+        public async Task<Result<IEnumerable<Item>>> ListAsync(ItemVM model)
         {
             try
             {
-                var result = (await _dbPRD.GetProductsAsync(
+                var result = (await _dbPRD.GetItemsAsync(
                     _classificationID: model.ClassificationID,
                     _brandID: model.BrandID,
                     _faName: model.FaName,
@@ -102,14 +102,14 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
                     _pageIndex:model.PageIndex,
                     _pageSize: model.PageSize
                     
-                    )).ToListActionResult<Product>();
+                    )).ToListActionResult<Item>();
 
                 if (result.Data != null && model.IsAttachment)
                 {
                     var resultAttachment = await _attachmentDataSource.ListAsync(new AttachmentListVM { ParentIDs = result.Data.Select(x => x.GuID).ToList() });
-                    foreach (var Product in result.Data)
+                    foreach (var Item in result.Data)
                     {
-                        Product.Attachments = resultAttachment.Data.Where(x => x.ParentID == Product.GuID).ToList();
+                        Item.Attachments = resultAttachment.Data.Where(x => x.ParentID == Item.GuID).ToList();
                     }
                 }
 

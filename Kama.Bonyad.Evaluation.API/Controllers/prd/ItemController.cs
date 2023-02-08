@@ -10,32 +10,32 @@ using System.Web.Http;
 namespace Kama.Bonyad.Evaluation.API.Controllers
 {
 
-    [RoutePrefix("api/v1/Product")]
-    public class ProductController : BaseApiController<IProductService>
+    [RoutePrefix("api/v1/Item")]
+    public class ItemController : BaseApiController<IItemService>
     {
 
-        public ProductController(IProductService service) : base(service)
+        public ItemController(IItemService service) : base(service)
         {
         }
 
         [HttpPost, Route("Add")]
-        public Task<Result<Product>> Add(Product model)
+        public Task<Result<Item>> Add(Item model)
             => _service.AddAsync(model);
 
         [HttpPost, Route("Edit")]
-        public Task<Result<Product>> Edit(Product model)
+        public Task<Result<Item>> Edit(Item model)
             => _service.EditAsync(model);
 
         [HttpPost, Route("Delete")]
-        public Task<Result> Delete(Product model)
+        public Task<Result> Delete(Item model)
             => _service.DeleteAsync(model);
 
         [HttpPost, Route("Get")]
-        public Task<Result<Product>> Get(Product model)
+        public Task<Result<Item>> Get(Item model)
             => _service.GetAsync(model);
 
         [HttpPost, Route("List")]
-        public Task<Result<IEnumerable<Product>>> List(ProductVM model)
+        public Task<Result<IEnumerable<Item>>> List(ItemVM model)
             => _service.ListAsync(model);
     }
 }

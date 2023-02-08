@@ -53,7 +53,7 @@
     <Compile Include="prd\IInformationService.cs" />
     <Compile Include="prd\IClassificationService.cs" />
     <Compile Include="prd\IStockService.cs" />
-    <Compile Include="prd\IProductService.cs" />
+    <Compile Include="prd\IItemService.cs" />
     <Compile Include="pbl\ITagService.cs" />
     <Compile Include="prd\IProductClassificationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
