@@ -19,8 +19,8 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
         {
             try
             {
-                var result = (await _dbPRD.AddTagAsync(
-                    _productID: model.ProductID,
+                var result = (await _dbPBL.AddTagAsync(
+                    _itemID: model.ItemID,
                     _tag: model.TagName
                     )).ToActionResult<Core.Model.Tag>();
 
@@ -36,8 +36,8 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
         {
             try
             {
-                var result = (await _dbPRD.DeleteTagAsync(
-                    _productID: model.ProductID,
+                var result = (await _dbPBL.DeleteTagAsync(
+                    _itemID: model.ItemID,
                     _tagID: model.TagID
                     )).ToActionResult(); 
 
@@ -53,8 +53,8 @@ namespace Kama.Bonyad.Evaluation.Infrastructure.DAL.DataSources
         {
             try
             {
-                var result = (await _dbPRD.GetTagsAsync(
-                    _productID:model.ProductID
+                var result = (await _dbPBL.GetTagsAsync(
+                    _itemID: model.ItemID
                     )).ToListActionResult<Tag>();
                 return result;
             }

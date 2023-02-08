@@ -132,49 +132,6 @@ public ResultSet GetProduct(long? _id, Guid? _guID, int? timeout = null)
 
 #endregion
 
-#region GetProducts
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetProducts(long? _classificationID, long? _brandID, string _faName, string _enName, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-var cmd = base.CreateCommand("prd.spGetProducts", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AClassificationID", IsOutput = false, Value = _classificationID == null ? DBNull.Value : (object)_classificationID }, 
-					new Parameter { Name = "@ABrandID", IsOutput = false, Value = _brandID == null ? DBNull.Value : (object)_brandID }, 
-					new Parameter { Name = "@AFaName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_faName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_faName) }, 
-					new Parameter { Name = "@AEnName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_enName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_enName) }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetProductsAsync(long? _classificationID, long? _brandID, string _faName, string _enName, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetProducts(_classificationID, _brandID, _faName, _enName, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetProductsDapperAsync<T>(long? _classificationID, long? _brandID, string _faName, string _enName, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("prd.spGetProducts",new {AClassificationID=_classificationID,ABrandID=_brandID,AFaName=string.IsNullOrWhiteSpace(_faName) ? _faName : ReplaceArabicWithPersianChars(_faName),AEnName=string.IsNullOrWhiteSpace(_enName) ? _enName : ReplaceArabicWithPersianChars(_enName),APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
-}
-
-public ResultSet GetProducts(long? _classificationID, long? _brandID, string _faName, string _enName, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetProducts(_classificationID, _brandID, _faName, _enName, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
 #region ModifyProduct
 
 public System.Data.SqlClient.SqlCommand GetCommand_ModifyProduct(bool? _isNewRecord, long? _id, Guid? _guID, long? _classificationID, long? _brandID, string _faName, string _enName, string _information, int? timeout = null)
@@ -213,6 +170,49 @@ public async Task<AppCore.Result<IEnumerable<T>>> ModifyProductDapperAsync<T>(bo
 public ResultSet ModifyProduct(bool? _isNewRecord, long? _id, Guid? _guID, long? _classificationID, long? _brandID, string _faName, string _enName, string _information, int? timeout = null)
 {
 	using(var cmd = GetCommand_ModifyProduct(_isNewRecord, _id, _guID, _classificationID, _brandID, _faName, _enName, _information, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetProducts
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetProducts(long? _classificationID, long? _brandID, string _faName, string _enName, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+var cmd = base.CreateCommand("prd.spGetProducts", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AClassificationID", IsOutput = false, Value = _classificationID == null ? DBNull.Value : (object)_classificationID }, 
+					new Parameter { Name = "@ABrandID", IsOutput = false, Value = _brandID == null ? DBNull.Value : (object)_brandID }, 
+					new Parameter { Name = "@AFaName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_faName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_faName) }, 
+					new Parameter { Name = "@AEnName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_enName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_enName) }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetProductsAsync(long? _classificationID, long? _brandID, string _faName, string _enName, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetProducts(_classificationID, _brandID, _faName, _enName, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetProductsDapperAsync<T>(long? _classificationID, long? _brandID, string _faName, string _enName, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("prd.spGetProducts",new {AClassificationID=_classificationID,ABrandID=_brandID,AFaName=string.IsNullOrWhiteSpace(_faName) ? _faName : ReplaceArabicWithPersianChars(_faName),AEnName=string.IsNullOrWhiteSpace(_enName) ? _enName : ReplaceArabicWithPersianChars(_enName),APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
+}
+
+public ResultSet GetProducts(long? _classificationID, long? _brandID, string _faName, string _enName, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetProducts(_classificationID, _brandID, _faName, _enName, _pageSize, _pageIndex, timeout))
 {
 	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
 }
@@ -1456,6 +1456,122 @@ public async Task<AppCore.Result<IEnumerable<T>>> GetFlowsDapperAsync<T>(int? _d
 public ResultSet GetFlows(int? _documentID, int? timeout = null)
 {
 	using(var cmd = GetCommand_GetFlows(_documentID, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region AddTag
+
+public System.Data.SqlClient.SqlCommand GetCommand_AddTag(long? _itemID, string _tag, int? timeout = null)
+{
+var cmd = base.CreateCommand("pbl.spAddTag", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AItemID", IsOutput = false, Value = _itemID == null ? DBNull.Value : (object)_itemID }, 
+					new Parameter { Name = "@ATag", IsOutput = false, Value = string.IsNullOrWhiteSpace(_tag) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_tag) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> AddTagAsync(long? _itemID, string _tag, int? timeout = null)
+{
+	using(var cmd = GetCommand_AddTag(_itemID, _tag, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> AddTagDapperAsync<T>(long? _itemID, string _tag, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("pbl.spAddTag",new {AItemID=_itemID,ATag=string.IsNullOrWhiteSpace(_tag) ? _tag : ReplaceArabicWithPersianChars(_tag)} , timeout );
+}
+
+public ResultSet AddTag(long? _itemID, string _tag, int? timeout = null)
+{
+	using(var cmd = GetCommand_AddTag(_itemID, _tag, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region DeleteTag
+
+public System.Data.SqlClient.SqlCommand GetCommand_DeleteTag(int? _tagID, long? _itemID, int? timeout = null)
+{
+var cmd = base.CreateCommand("pbl.spDeleteTag", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@ATagID", IsOutput = false, Value = _tagID == null ? DBNull.Value : (object)_tagID }, 
+					new Parameter { Name = "@AItemID", IsOutput = false, Value = _itemID == null ? DBNull.Value : (object)_itemID }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> DeleteTagAsync(int? _tagID, long? _itemID, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteTag(_tagID, _itemID, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> DeleteTagDapperAsync<T>(int? _tagID, long? _itemID, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("pbl.spDeleteTag",new {ATagID=_tagID,AItemID=_itemID} , timeout );
+}
+
+public ResultSet DeleteTag(int? _tagID, long? _itemID, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteTag(_tagID, _itemID, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetTags
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetTags(long? _itemID, int? timeout = null)
+{
+var cmd = base.CreateCommand("pbl.spGetTags", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AItemID", IsOutput = false, Value = _itemID == null ? DBNull.Value : (object)_itemID }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetTagsAsync(long? _itemID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetTags(_itemID, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetTagsDapperAsync<T>(long? _itemID, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("pbl.spGetTags",new {AItemID=_itemID} , timeout );
+}
+
+public ResultSet GetTags(long? _itemID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetTags(_itemID, timeout))
 {
 	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
 }

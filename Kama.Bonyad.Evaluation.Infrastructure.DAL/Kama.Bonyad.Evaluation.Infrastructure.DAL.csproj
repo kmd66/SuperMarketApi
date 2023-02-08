@@ -100,8 +100,8 @@
     <Content Include="DatabaseScript\Procedures\prd\Stock\spAddStock.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Information\spAddInformation.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Information\spGetInformations.sql" />
-    <Content Include="DatabaseScript\Procedures\prd\Tag\spDeleteTag.sql" />
-    <Content Include="DatabaseScript\Procedures\prd\Tag\spAddTag.sql" />
+    <Content Include="DatabaseScript\Procedures\pbl\Tag\spDeleteTag.sql" />
+    <Content Include="DatabaseScript\Procedures\pbl\Tag\spAddTag.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Product\spDeleteProduct.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Product\spGetProduct.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Product\spGetProducts.sql" />
@@ -110,7 +110,7 @@
     <Content Include="DatabaseScript\Procedures\prd\Classification\spGetClassifications.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Classification\spGetClassification.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Classification\spModifyClassification.sql" />
-    <Content Include="DatabaseScript\Procedures\prd\Tag\spGetTags.sql" />
+    <Content Include="DatabaseScript\Procedures\pbl\Tag\spGetTags.sql" />
     <Content Include="DatabaseScript\Schema.sql" />
     <Content Include="DatabaseScript\Synonyms\Attachment.sql" />
     <Content Include="DatabaseScript\Synonyms\Departments.sql" />
@@ -118,6 +118,7 @@
     <Content Include="DatabaseScript\Synonyms\Positions.sql" />
     <Content Include="DatabaseScript\Synonyms\Users.sql" />
     <Content Include="DatabaseScript\Synonyms\_Position.sql" />
+    <Content Include="DatabaseScript\Views\_Item.sql" />
     <Content Include="DatabaseScript\Views\_Product.sql" />
     <Content Include="DatabaseScript\backTabel.sql" />
     <Content Include="obj\Debug\TempPE\DatabaseModel1.cs.dll" />
@@ -133,7 +134,7 @@
     <Compile Include="DataSources\prd\ProductDataSource.cs" />
     <Compile Include="DataSources\prd\InformationDataSource.cs" />
     <Compile Include="DataSources\prd\StockDataSource.cs" />
-    <Compile Include="DataSources\prd\TagDataSource.cs" />
+    <Compile Include="DataSources\Public\TagDataSource.cs" />
     <Compile Include="DataSources\prd\ProductClassificationDataSource.cs" />
     <Compile Include="DataSources\Public\AttachmentDataSource.cs" />
     <Compile Include="DataSources\Public\FlowDataSource.cs" />

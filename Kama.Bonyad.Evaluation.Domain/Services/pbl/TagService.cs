@@ -33,7 +33,7 @@ namespace Kama.Bonyad.Evaluation.Domain.Services
         {
             if (string.IsNullOrEmpty(model.TagName))
                 return AppCore.Result<Tag>.Failure(message: "نام وارد نشده است");
-            if (model.ProductID == 0)
+            if (model.ItemID == 0)
                 return AppCore.Result<Tag>.Failure(message: "ProductID null");
 
             return AppCore.Result<Tag>.Successful();

@@ -55,12 +55,12 @@
     <Compile Include="prd\IProductDataSource.cs" />
     <Compile Include="prd\IInformationDataSource.cs" />
     <Compile Include="prd\IStockDataSource.cs" />
-    <Compile Include="prd\ITagDataSource.cs" />
+    <Compile Include="pbl\ITagDataSource.cs" />
     <Compile Include="prd\IProductClassificationDataSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Public\IAttachmentDataSource.cs" />
-    <Compile Include="Public\IFlowDataSource.cs" />
-    <Compile Include="Public\IBrandDataSource.cs" />
+    <Compile Include="pbl\IAttachmentDataSource.cs" />
+    <Compile Include="pbl\IFlowDataSource.cs" />
+    <Compile Include="pbl\IBrandDataSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

@@ -221,7 +221,7 @@
     <Compile Include="Controllers\prd\ProductController.cs" />
     <Compile Include="Controllers\prd\InformationController.cs" />
     <Compile Include="Controllers\prd\StockController.cs" />
-    <Compile Include="Controllers\prd\TagController .cs" />
+    <Compile Include="Controllers\pbl\TagController .cs" />
     <Compile Include="Controllers\prd\ProductClassificationController.cs" />
     <Compile Include="Filters\ExceptionHandler.cs" />
     <Compile Include="Filters\ExceptionLogger.cs" />

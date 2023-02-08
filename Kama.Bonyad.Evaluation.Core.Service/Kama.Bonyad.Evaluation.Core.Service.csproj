@@ -54,11 +54,11 @@
     <Compile Include="prd\IClassificationService.cs" />
     <Compile Include="prd\IStockService.cs" />
     <Compile Include="prd\IProductService.cs" />
-    <Compile Include="prd\ITagService.cs" />
+    <Compile Include="pbl\ITagService.cs" />
     <Compile Include="prd\IProductClassificationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Public\IAttachmentService.cs" />
-    <Compile Include="Public\IBrandService.cs" />
+    <Compile Include="pbl\IAttachmentService.cs" />
+    <Compile Include="pbl\IBrandService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kama.Bonyad.Evaluation.Core.Model\Kama.Bonyad.Evaluation.Core.Model.csproj">

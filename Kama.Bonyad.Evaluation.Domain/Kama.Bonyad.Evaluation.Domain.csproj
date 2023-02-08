@@ -81,10 +81,10 @@
     <Compile Include="Services\prd\ProductService.cs" />
     <Compile Include="Services\prd\InformationService.cs" />
     <Compile Include="Services\prd\StockService.cs" />
-    <Compile Include="Services\prd\TagService.cs" />
+    <Compile Include="Services\pbl\TagService.cs" />
     <Compile Include="Services\prd\ProductClassificationService.cs" />
-    <Compile Include="Services\Public\AttachmentService.cs" />
-    <Compile Include="Services\Public\BrandService.cs" />
+    <Compile Include="Services\pbl\AttachmentService.cs" />
+    <Compile Include="Services\pbl\BrandService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

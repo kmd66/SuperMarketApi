@@ -88,8 +88,8 @@
     <Compile Include="prd\Stock\StockChengState.cs" />
     <Compile Include="prd\Stock\StockVM.cs" />
     <Compile Include="prd\Stock\Stock.cs" />
-    <Compile Include="prd\Tag\Tag.cs" />
-    <Compile Include="prd\Tag\TagVM.cs" />
+    <Compile Include="pbl\Tag\Tag.cs" />
+    <Compile Include="pbl\Tag\TagVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="pbl\Attachment\Attachment.cs" />
     <Compile Include="pbl\Attachment\AttachmentListVM.cs" />

@@ -4,6 +4,6 @@ namespace Kama.Bonyad.Evaluation.Core.Model
 {
     public class TagVM : ListVM
     {
-        public long ProductID { get; set; }
+        public long ItemID { get; set; }
     }
 }
