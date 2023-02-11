@@ -1,47 +1,64 @@
-﻿--USE [Kama.Sm]
---GO
+﻿USE [Kama.Sm]
+GO
 
---IF EXISTS(SELECT 1 FROM sys.procedures WHERE [object_id] = OBJECT_ID('prd.spGetProducts'))
---	DROP PROCEDURE prd.spGetProducts
---GO
+IF EXISTS(SELECT 1 FROM sys.procedures WHERE [object_id] = OBJECT_ID('prd.spGetDocuments'))
+	DROP PROCEDURE prd.spGetDocuments
+GO
 
---CREATE PROCEDURE prd.spGetProducts
---	@AParentID BIGINT,
---	@AName NVARCHAR(MAX),
---	@AComment NVARCHAR(MAX),
---	@AStartPrice BIGINT,
---	@AEndPrice BIGINT,
---	@APageSize INT,
---	@APageIndex INT
---WITH ENCRYPTION
---AS
---BEGIN
---	SET NOCOUNT ON;
---	SET XACT_ABORT ON;
+CREATE PROCEDURE prd.spGetDocuments
+	@AItemID BIGINT,
+	@AStorageID BIGINT,
+	@ASaleID BIGINT,
+	@AOrderID BIGINT,
+	@ALastState TINYINT,
+	@APageSize INT,
+	@APageIndex INT
+WITH ENCRYPTION
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SET XACT_ABORT ON;
 	
---	DECLARE 
---		@ParentID BIGINT = @AParentID,
---		@Name NVARCHAR(MAX) = TRIM(@AName),
---		@Comment NVARCHAR(MAX) = TRIM(@AComment),
---		@StartPrice BIGINT = @AStartPrice,
---		@EndPrice BIGINT = @AEndPrice,
---		@PageSize INT = @APageSize,
---		@PageIndex INT = @APageIndex
+	DECLARE 
+		@ItemID BIGINT = @AItemID,
+		@StorageID BIGINT = @AStorageID,
+		@SaleID BIGINT = @ASaleID,
+		@OrderID BIGINT = @AOrderID,
+		@LastState TINYINT = @ALastState,
+		@PageSize INT = @APageSize,
+		@PageIndex INT = @APageIndex
 	
---	IF @PageSize = 0
---	BEGIN
---		SET @PageSize = 1000
---		SET @PageIndex = 1
---	END
+	IF @PageSize = 0
+	BEGIN
+		SET @PageSize = 1000
+		SET @PageIndex = 1
+	END
 	
---	SELECT *
---	FROM prd._Product
---	WHERE (@ParentID = 0 OR ParentID = @ParentID)
---		AND(@Name IS NULL OR [Name] LIKE '%' + @Name + '%')
---		AND(@Comment IS NULL OR Comment LIKE '%' + @Comment + '%')
---		AND (@StartPrice = 0 OR Price >= @StartPrice)
---		AND (@EndPrice = 0 OR Price <= @EndPrice)
---	ORDER BY CreateDate
---	OFFSET ((@PageIndex - 1) * @PageSize) ROWS FETCH NEXT @PageSize ROWS ONLY
+	SELECT 
+		prd.[ID], 
+		prd.[ItemID], 
+		prd.[StorageID],
+		prd.[SaleID],
+		prd.[OrderID],
+		prd.[LastState],
+		prd.[Expired],
+		prd.CreatorID, 
+		prd.CreationDate,
+		prd.FaName,
+		prd.EnName,
+		prd.ClassificationID,
+		prd.ClassificationName,
+		prd.brandID,
+		prd.brandName,
+		prd.ToPositionID
+	FROM prd._Product prd
+	LEFT JOIN org._position pos ON Pos.ID = prd.ToPositionID
+	WHERE (@ItemID = 0 OR ItemID = ItemID)
+		AND(@StorageID = 0 OR StorageID = @StorageID)
+		AND(@SaleID = 0 OR SaleID = @SaleID)
+		AND(@OrderID = 0 OR OrderID = @OrderID)
+		AND(@LastState = 0 OR LastState = @LastState)
+	ORDER BY CreationDate
+	OFFSET ((@PageIndex - 1) * @PageSize) ROWS FETCH NEXT @PageSize ROWS ONLY
 
---END
+END

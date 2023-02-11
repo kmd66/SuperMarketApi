@@ -16,6 +16,6 @@ BEGIN
 
 	DECLARE @ID BIGINT= @AID,
 		@UserID  UNIQUEIDENTIFIER = @AUserID  
-	UPDATE prd.Document SET RemoverUserID = @AUserID, RemoveDate= GETDATE() WHERE ID =@ID 
+	UPDATE prd.Document SET RemoverID = @AUserID, RemoveDate= GETDATE() WHERE ID =@ID 
 
 END

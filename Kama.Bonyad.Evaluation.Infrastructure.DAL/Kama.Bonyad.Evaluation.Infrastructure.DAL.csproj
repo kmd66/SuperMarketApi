@@ -67,6 +67,9 @@
     <Content Include="DatabaseScript\Procedures\pbl\Attachment\spGetAttachment.sql" />
     <Content Include="DatabaseScript\Procedures\pbl\Attachment\spGetAttachments.sql" />
     <Content Include="DatabaseScript\Procedures\pbl\Attachment\spModifyAttachment.sql" />
+    <Content Include="DatabaseScript\Procedures\pbl\Depo\spDepoIndexList.sql" />
+    <Content Include="DatabaseScript\Procedures\pbl\Depo\spDepoIndex.sql" />
+    <Content Include="DatabaseScript\Procedures\pbl\Depo\spAddStorageDepo.sql" />
     <Content Include="DatabaseScript\Procedures\pbl\Flow\spAddFlow.sql" />
     <Content Include="DatabaseScript\Procedures\pbl\Flow\spGetFlows.sql" />
     <Content Include="DatabaseScript\Procedures\pbl\Brand\spDeleteBrand.sql" />
@@ -74,10 +77,14 @@
     <Content Include="DatabaseScript\Procedures\pbl\Brand\spGetBrands.sql" />
     <Content Include="DatabaseScript\Procedures\pbl\Brand\spModifyBrand.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Classification\spGetLastNodeProductClassifications.sql" />
+    <Content Include="DatabaseScript\Procedures\pbl\Depo\spAddDepo.sql" />
+    <Content Include="DatabaseScript\Procedures\pbl\Depo\spDeleteDepo.sql" />
+    <Content Include="DatabaseScript\Procedures\pbl\Depo\spGetDepo.sql" />
+    <Content Include="DatabaseScript\Procedures\pbl\Depo\spGetDepos.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Document\spDeleteDocument.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Document\spGetDocument.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Document\spGetDocuments.sql" />
-    <Content Include="DatabaseScript\Procedures\prd\Document\spModifyDocument.sql" />
+    <Content Include="DatabaseScript\Procedures\prd\Document\spAddDocument.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Information\spAddClassificationInformation.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Information\spDeleteClassificationInformation.sql" />
     <Content Include="DatabaseScript\Procedures\prd\Information\spGetClassificationInformations.sql" />
@@ -130,15 +137,16 @@
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataSources\DataSource.cs" />
+    <Compile Include="DataSources\pbl\DepoDataSource.cs" />
     <Compile Include="DataSources\prd\ClassificationDataSource.cs" />
     <Compile Include="DataSources\prd\ItemDataSource.cs" />
     <Compile Include="DataSources\prd\InformationDataSource.cs" />
     <Compile Include="DataSources\prd\StockDataSource.cs" />
-    <Compile Include="DataSources\Public\TagDataSource.cs" />
+    <Compile Include="DataSources\pbl\TagDataSource.cs" />
     <Compile Include="DataSources\prd\ProductClassificationDataSource.cs" />
-    <Compile Include="DataSources\Public\AttachmentDataSource.cs" />
-    <Compile Include="DataSources\Public\FlowDataSource.cs" />
-    <Compile Include="DataSources\Public\BrandDataSource.cs" />
+    <Compile Include="DataSources\pbl\AttachmentDataSource.cs" />
+    <Compile Include="DataSources\pbl\FlowDataSource.cs" />
+    <Compile Include="DataSources\pbl\BrandDataSource.cs" />
     <Compile Include="LayerRegistrar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

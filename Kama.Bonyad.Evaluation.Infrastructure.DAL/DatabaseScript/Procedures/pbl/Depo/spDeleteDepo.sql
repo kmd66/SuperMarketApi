@@ -1,0 +1,19 @@
+﻿USE [Kama.Sm]
+GO
+
+IF EXISTS(SELECT 1 FROM sys.procedures WHERE [object_id] = OBJECT_ID('pbl.spDeleteDepo'))
+	DROP PROCEDURE pbl.spDeleteDepo
+GO
+
+CREATE PROCEDURE pbl.spDeleteDepo
+	@AID BIGINT
+WITH ENCRYPTION
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SET XACT_ABORT ON;
+
+	DECLARE @ID BIGINT= @AID
+	UPDATE pbl.Depo SET [Removed] = 1
+
+END

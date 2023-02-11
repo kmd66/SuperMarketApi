@@ -3,6 +3,18 @@ using System.ComponentModel;
 
 namespace Kama.Bonyad.Evaluation.Core.Model
 {
+    public enum DepoType : byte
+    {
+        Unknown = 0,
+        ورود_انبار_مخزن = 1,
+        ورود_انبار_فروش = 2,
+        ورود_انبار_ارسال = 3,
+
+        خروج_انبار_مخزن = 10,
+        خروج_انبار_فروش = 11,
+        خروج_انبار_ارسال = 12,
+    }
+
     public enum ActionState : byte
     {
         Unknown = 0,
@@ -26,12 +38,17 @@ namespace Kama.Bonyad.Evaluation.Core.Model
     public enum DocState : byte
     {
         Unknown = 0,
-        انبار = 1,
-        پردازش_سفارش = 5,
-        درحال_ارسال = 10,
-        تحویل_داده_شده = 20,
+        انبار_مخزن = 1,
+        انبار_فروش = 2,
+        انبار_ارسال = 3,
+
+        درحال_ارسال = 40,
+        تحویل_داده_شده = 50,
+
         مرجوع = 80,
+
         فروش_حضوری = 100,
+
         انقضا = 220,
         مرجوع_به_تولید_کننده = 221,
         دورریز = 222

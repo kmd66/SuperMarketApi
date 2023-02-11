@@ -21,25 +21,18 @@ BEGIN
 		    ,flow.[DocumentID]
 		    ,flow.[Date]
 		    ,flow.[FromPositionID]
-		    ,flow.[FromUserID]
-		    ,flow.[FromDocState]
 		    ,flow.[ToPositionID]
-		    ,flow.[ToUserID]
-		    ,flow.[ToDocState]
 		    ,flow.[SendType]
 		    ,flow.[Comment]
 		    ,flow.[ReadDate]
-		    ,flow.[IsRead]
 		    ,flow.[ActionDate]
-			,COALESCE(toUser.FirstName, '') + ' ' + COALESCE(toUser.LastName, '') ToUserFullName
-			,COALESCE(fromUser.FirstName, '') + ' ' + COALESCE(fromUser.LastName, '') FromUserFullName
-			,toPosition.[Type] ToUserPositionType
-			,fromPosition.[Type] FromUserPositionType
-		FROM [pbl].[DocumentFlow] flow
-		LEFT JOIN org.Users fromUser ON fromUser.ID = flow.FromUserID
-		LEFT JOIN org._Position fromPosition ON fromPosition.ID = flow.FromPositionID
-		LEFT JOIN org.Users toUser ON toUser.ID = flow.ToUserID
-		LEFT JOIN org._Position toPosition ON toPosition.ID = flow.ToPositionID
+			,COALESCE(frPo.FirstName, '') + ' ' + COALESCE(frPo.LastName, '') ToUserFullName
+			,COALESCE(toPo.FirstName, '') + ' ' + COALESCE(toPo.LastName, '') FromUserFullName
+			,frPo.[Type] ToUserPositionType
+			,toPo.[Type] FromUserPositionType
+		FROM prd.Flow flow
+		LEFT JOIN org._Position frPo ON frPo.ID = flow.FromPositionID
+		LEFT JOIN org._Position toPo ON toPo.ID = flow.ToPositionID
 		WHERE flow.[DocumentID] = @DocumentID
 	)
 	,Total AS

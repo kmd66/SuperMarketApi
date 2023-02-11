@@ -69,6 +69,20 @@ namespace Kama.Bonyad.Evaluation.ApiClient.Interface
 
 					 }
 
+  		 public interface IDepoService: IService
+		 {
+						 				Task<AppCore.Result<model.Depo>> EnterStorageAsync(model.Depo model, IDictionary<string, string> httpHeaders = null);
+
+						 				Task<AppCore.Result> Delete(model.Depo model, IDictionary<string, string> httpHeaders = null);
+
+						 				Task<AppCore.Result<model.Depo>> Get(model.Depo model, IDictionary<string, string> httpHeaders = null);
+
+						 				Task<AppCore.Result<IEnumerable<model.Depo>>> List(model.DepoVM model, IDictionary<string, string> httpHeaders = null);
+
+						 				Task<AppCore.Result<IEnumerable<model.DepoIndex>>> DepoIndexList(model.DepoVM model, IDictionary<string, string> httpHeaders = null);
+
+					 }
+
   		 public interface IClassificationService: IService
 		 {
 						 				Task<AppCore.Result<model.Classification>> Add(model.Classification model, IDictionary<string, string> httpHeaders = null);

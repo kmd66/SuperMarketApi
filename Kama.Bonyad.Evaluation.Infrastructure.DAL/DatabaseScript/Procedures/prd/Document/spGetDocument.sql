@@ -6,7 +6,7 @@ IF EXISTS(SELECT 1 FROM sys.procedures WHERE [object_id] = OBJECT_ID('prd.spGetD
 GO
 
 CREATE PROCEDURE prd.spGetDocument
-	@AType BIGINT
+	@AID BIGINT
 WITH ENCRYPTION
 AS
 BEGIN
@@ -14,25 +14,28 @@ BEGIN
 	SET XACT_ABORT ON;
 	
 	DECLARE
-		@Type BIGINT = @AType 
-	
+		@ID BIGINT = @AID 
 	
 	SELECT 
-		count(doc.ID) Count,
-		doc.Type, 
-		doc.CreatorID, 
-		doc.CreationDate,
-		COALESCE(FrPos.FirstName,'')+ ' '+COALESCE(FrPos.LastName,' ')  FromPositionName
-	FROM prd.Document doc
-	INNER JOIN prd.Flow flw ON flw.DocumentID = doc.ID AND flw.ActionDate IS NULL
-		AND flw.FromState = 1 AND flw.ToState = 1
-	LEFT JOIN org._Position FrPos ON flw.ToPositionID = FrPos.ID
-	WHERE doc.Type =@Type
-	GROUP BY 
-		doc.Type, 
-		doc.CreatorID, 
-		doc.CreationDate,
-		FrPos.FirstName,
-		FrPos.LastName
+		prd.[ID], 
+		prd.[ItemID], 
+		prd.[StorageID],
+		prd.[SaleID],
+		prd.[OrderID],
+		prd.[LastState],
+		prd.[Expired],
+		prd.CreatorID, 
+		prd.CreationDate,
+		prd.FaName,
+		prd.EnName,
+		prd.ClassificationID,
+		prd.ClassificationName,
+		prd.brandID,
+		prd.brandName,
+		prd.ToPositionID,
+		COALESCE(pos.FirstName,'') + ' '+COALESCE(pos.LastName,' ')  FromPositionName
+	FROM prd._Product prd
+	LEFT JOIN org._position pos ON Pos.ID = prd.ToPositionID
+	WHERE prd.[ID] = @ID
 
 END

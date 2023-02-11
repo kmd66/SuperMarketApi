@@ -199,7 +199,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Files\JSON\IncomingMails.json" />
     <Content Include="Index.html" />
     <Content Include="New Features.txt" />
     <Content Include="Web.config">
@@ -217,6 +216,7 @@
     <Compile Include="Controllers\Organization\PositionController.cs" />
     <Compile Include="Controllers\pbl\AttachmentController.cs" />
     <Compile Include="Controllers\pbl\BrandController.cs" />
+    <Compile Include="Controllers\pbl\DepoController.cs" />
     <Compile Include="Controllers\prd\ClassificationController.cs" />
     <Compile Include="Controllers\prd\ItemController.cs" />
     <Compile Include="Controllers\prd\InformationController.cs" />
@@ -247,7 +247,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="Files\JSON\SearchLetter.json" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -155,6 +155,51 @@ namespace Kama.Bonyad.Evaluation.ApiClient
 
             		 }
   
+		 partial class DepoService: Service, IDepoService
+		 {
+			public DepoService(IEvaluationClient client)
+			{
+				_client = client;
+			}
+			readonly IEvaluationClient _client;
+
+			            public virtual Task<AppCore.Result<Kama.Bonyad.Evaluation.Core.Model.Depo>> EnterStorageAsync( Kama.Bonyad.Evaluation.Core.Model.Depo model, IDictionary<string, string> httpHeaders = null)
+			{
+						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
+			const string url = "api/v1/Depo/EnterStorageAsync";
+							return _client.SendAsync<Kama.Bonyad.Evaluation.Core.Model.Depo>(true, url, routeParamValues, httpHeaders, model);
+						}
+
+                        public virtual Task<AppCore.Result> Delete( Kama.Bonyad.Evaluation.Core.Model.Depo model, IDictionary<string, string> httpHeaders = null)
+			{
+						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
+			const string url = "api/v1/Depo/Delete";
+							return _client.SendAsync(true, url, routeParamValues, httpHeaders, model);
+						}
+
+                        public virtual Task<AppCore.Result<Kama.Bonyad.Evaluation.Core.Model.Depo>> Get( Kama.Bonyad.Evaluation.Core.Model.Depo model, IDictionary<string, string> httpHeaders = null)
+			{
+						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
+			const string url = "api/v1/Depo/Get";
+							return _client.SendAsync<Kama.Bonyad.Evaluation.Core.Model.Depo>(true, url, routeParamValues, httpHeaders, model);
+						}
+
+                        public virtual Task<AppCore.Result<IEnumerable<Kama.Bonyad.Evaluation.Core.Model.Depo>>> List( Kama.Bonyad.Evaluation.Core.Model.DepoVM model, IDictionary<string, string> httpHeaders = null)
+			{
+						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
+			const string url = "api/v1/Depo/List";
+							return _client.SendAsync<IEnumerable<Kama.Bonyad.Evaluation.Core.Model.Depo>>(true, url, routeParamValues, httpHeaders, model);
+						}
+
+                        public virtual Task<AppCore.Result<IEnumerable<Kama.Bonyad.Evaluation.Core.Model.DepoIndex>>> DepoIndexList( Kama.Bonyad.Evaluation.Core.Model.DepoVM model, IDictionary<string, string> httpHeaders = null)
+			{
+						var routeParamValues = new Dictionary<string, string>{{"model", model == null ? null : model.ToString()}};
+			const string url = "api/v1/Depo/DepoIndexList";
+							return _client.SendAsync<IEnumerable<Kama.Bonyad.Evaluation.Core.Model.DepoIndex>>(true, url, routeParamValues, httpHeaders, model);
+						}
+
+            		 }
+  
 		 partial class ClassificationService: Service, IClassificationService
 		 {
 			public ClassificationService(IEvaluationClient client)

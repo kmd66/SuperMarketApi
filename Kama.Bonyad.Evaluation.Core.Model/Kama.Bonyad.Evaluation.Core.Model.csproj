@@ -75,6 +75,9 @@
     <Compile Include="Organization\Position.cs" />
     <Compile Include="pbl\Brand\Brand.cs" />
     <Compile Include="pbl\Brand\BrandVM.cs" />
+    <Compile Include="pbl\Depo\DepoIndex.cs" />
+    <Compile Include="pbl\Depo\Depo.cs" />
+    <Compile Include="pbl\Depo\DepoVM.cs" />
     <Compile Include="prd\Classification\Classification.cs" />
     <Compile Include="prd\Classification\ClassificationVM.cs" />
     <Compile Include="prd\Product2\Product.cs" />
